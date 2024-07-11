@@ -87,7 +87,7 @@ public class Window extends Canvas implements Runnable {
         g.setColor(Color.GRAY);
         g.fillRect(0, 0, width, height);
         
-        BlockLoader bl = new BlockLoader(g);
+        BlockLoader.Loader(g);
         renderedTimes++;
         g.dispose();
         bs.show();

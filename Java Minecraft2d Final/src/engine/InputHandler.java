@@ -8,8 +8,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
-public class InputHandler implements KeyListener, MouseListener, FocusListener, MouseMotionListener{
 
+public class InputHandler implements KeyListener, MouseListener, FocusListener, MouseMotionListener{
+    public static int walkSpeed = 10;
     @Override
     public void mouseDragged(MouseEvent e) {
     }
@@ -56,10 +57,10 @@ public class InputHandler implements KeyListener, MouseListener, FocusListener, 
         switch(key){
             
             case KeyEvent.VK_A:
-                Window.xmoved+= 2;
+                Window.xmoved+= walkSpeed;
                 break;
             case KeyEvent.VK_D:
-                Window.xmoved-= 2;
+                Window.xmoved-= walkSpeed;
                 break;
         }
     }
