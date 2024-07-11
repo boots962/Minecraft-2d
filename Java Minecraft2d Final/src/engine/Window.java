@@ -8,6 +8,7 @@ import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 
+import Terrain.BlockLoader;
 import Terrain.DirtBlock;
 import Terrain.GrassBlock;
 import Terrain.StoneBlock;
@@ -86,9 +87,7 @@ public class Window extends Canvas implements Runnable {
         g.setColor(Color.GRAY);
         g.fillRect(0, 0, width, height);
         
-        GrassBlock.placeBlock(g);
-        DirtBlock.placeBlock(g);
-        StoneBlock.placeBlock(g);
+        BlockLoader bl = new BlockLoader(g);
         renderedTimes++;
         g.dispose();
         bs.show();
