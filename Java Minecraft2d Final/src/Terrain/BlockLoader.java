@@ -11,18 +11,21 @@ public class BlockLoader {
     public static void Loader(Graphics2D g){
          int chunksLoaded = 0,prev=0, newx=4;
          int StartX = ((3*16)*50);
-
+ 
+         // Check if a new chunk needs to be added based on player movement
          if (Math.abs(Window.xmoved - prevXmoved) >= 800) {
-            prevXmoved = Window.xmoved; 
-            chunkstoGen++;
-            DirtBlock.newChunks(g, StartX);
-        }
+             int movement = Math.abs(Window.xmoved - prevXmoved);
+             int additionalChunks = movement / 800;
+             chunkstoGen += additionalChunks;
+             prevXmoved += additionalChunks * 800; // Update prevXmoved to account for all added chunks
+         }
          while(prev<newx){
             GrassBlock.placeBlock(g, prev, chunksLoaded);
             DirtBlock.placeBlock(g, prev, chunksLoaded);
             StoneBlock.placeBlock(g, prev, chunksLoaded);
             GrassBlock.newChunks(g, StartX);
             DirtBlock.newChunks(g, StartX);
+            StoneBlock.newChunks(g, StartX);
             prev++;
          }
 

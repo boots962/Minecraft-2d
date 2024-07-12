@@ -17,12 +17,32 @@ public class StoneBlock {
             int y=(mult*50)+ (50*j) + 300;
             g.setColor(Color.GREEN);
             int x = (i*50) + Window.xmoved;
-            g.drawImage(Textures.stone, x, y, null);
+           
+            if(x>=0 && x<=1200) g.drawImage(Textures.stone, x, y, null);
            
             if(Window.renderedTimes ==0){
                 worldFile.blockLocation(i*50, y, "STONE_BLOCK", mineable, solid, flammable);
             }
         }
         }
+    }
+    static int timesLoaded =0;
+    public static void newChunks(Graphics2D g, int startX){
+        for(int i = 0; i<BlockLoader.chunkstoGen; i++){
+        for(int j = 0; j<16; j++){
+            for(int k = 0; k<13; k++){
+                int funcX =(startX/50)+j;
+                int mult =((int) Math.abs((((Perlin.func(funcX))*50)+49)/50 * 50))/10;
+                int y=(mult*50)+ (50*k) + 300;
+                g.setColor(Color.GREEN);
+                int x = (j*50) + startX + Window.xmoved;
+                if(x>=0 && x<=1200) g.drawImage(Textures.stone, x, y, null);
+                if(timesLoaded ==0){
+                    worldFile.blockLocation(j*50, y, "STONE_BLOCK", mineable, solid, flammable);
+                }
+            }
+        }
+    }
+    timesLoaded++;
     }
 }

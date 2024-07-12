@@ -17,7 +17,7 @@ public class DirtBlock {
             int y=(mult*50) + 50+ (50*j) + 100;
             g.setColor(Color.GREEN);
             int x = (i*50) + Window.xmoved;
-            g.drawImage(Textures.dirt, x, y, null);
+            if(x>=0 && x<=1200) g.drawImage(Textures.dirt, x, y, null);
             if(Window.renderedTimes ==0){
                 worldFile.blockLocation(i*50, y, "DIRT_BLOCK", mineable, solid, flammable);
             }
@@ -29,17 +29,18 @@ public class DirtBlock {
         for(int i = 0; i<BlockLoader.chunkstoGen; i++){
         for(int j = 0; j<16; j++){
             for(int k = 0; k<3; k++){
-                
-                int mult =((int) Math.abs((((Perlin.func(j))*50)+49)/50 * 50))/10;
+                int funcX =(startX/50)+j;
+                int mult =((int) Math.abs((((Perlin.func(funcX))*50)+49)/50 * 50))/10;
                 int y=(mult*50) + 50+ (50*k) + 100;
                 g.setColor(Color.GREEN);
                 int x = (j*50) + startX + Window.xmoved;
-                g.drawImage(Textures.dirt, x, y, null);
+                if(x>=0 && x<=1200) g.drawImage(Textures.dirt, x, y, null);
                 if(timesLoaded ==0){
                     worldFile.blockLocation(j*50, y, "DIRT_BLOCK", mineable, solid, flammable);
                 }
             }
         }
     }
+    timesLoaded++;
     }
 }
