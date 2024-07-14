@@ -12,17 +12,16 @@ public class DirtBlock {
         int startBlock = startX / 50;
         int endBlock = startBlock + 16;
 
-        for (int i = startBlock; i < endBlock; i++) {
+        for (int i = startBlock-BlockLoader.chunkstoGen; i < endBlock + BlockLoader.chunkstoGen; i++) {
             for (int j = 0; j < 3; j++) {
+                
                 int mult = ((int) Math.abs((((Perlin.func(i)) * 50) + 49) / 50 * 50)) / 10;
                 int y = (mult * 50) + 50 + (50 * j) + 100;
                 int x = (i * 50) + Window.xmoved;
-
-                if (x >= 0 && x <= 1200) {
+                int caveY = ((int) Math.abs((((Perlin.caveFunc(i)) * 50) + 49) / 50 * 50)) / 10;
+               caveY=((caveY * 50) + 50 + (50 * j) + 100);
+                if (x >= 0 && x <= 1200 && y!=caveY) {
                     g.drawImage(Textures.dirt, x, y, null);
-                    if (Window.renderedTimes == 0) {
-                        worldFile.blockLocation(i * 50, y, "DIRT_BLOCK", mineable, solid, flammable);
-                    }
                 }
             }
         }

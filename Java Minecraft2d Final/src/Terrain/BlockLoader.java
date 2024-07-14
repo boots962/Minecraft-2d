@@ -19,8 +19,8 @@ public class BlockLoader {
         int startX = topCornerX * chunkSize;
 
         // Check if a new chunk needs to be added based on player movement
-        if (Math.abs(Window.xmoved - prevXmoved) >= 800) {
-            int movement = Math.abs(Window.xmoved - prevXmoved);
+        if (Window.xmoved%400 == 0 && Window.xmoved!=0) {
+            int movement = Math.abs(Window.xmoved);
             chunkstoGen += movement / 800;
             prevXmoved = -Window.xmoved; // Update prevXmoved
         }

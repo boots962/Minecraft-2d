@@ -46,16 +46,31 @@ public class worldFile {
         }
     }
 
-    public static void blockLocation(int x, int y, String type, boolean mineable, boolean solid, boolean flammable){//writes block locations
-        File blockFile = new File("Java Minecraft2d Final\\src\\Saves\\" + worldFolder + "\\blocks.txt");
+
+    public static boolean chunkInfo(String chunkID){
+        File chunkFile = new File("Java Minecraft2d Final\\src\\Saves\\" + worldFolder + "\\chunks.txt");
+        String data = "";
         try {
-            FileWriter writer = new FileWriter(blockFile, true);
-            writer.append(x+" " + y + " " + type + " " + mineable + " " + solid + " " + flammable);
+            Scanner read = new Scanner(chunkFile);
+            while(read.hasNextLine()){
+                data = read.nextLine();
+                if(data.equals(chunkID)){ //we are checking if the chunk has alr been loaded before writing the chunks info to file
+                    return true;
+                }
+            }
+            read.close();
+        } catch (FileNotFoundException e) {
+        }
+        
+        try {
+            FileWriter writer = new FileWriter(chunkFile, true);
+            writer.append(chunkID); //assums the chunk has not been loaded so it will input the chunkID into the file
             writer.append("\n");
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
 }
