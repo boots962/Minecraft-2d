@@ -1,5 +1,30 @@
 package Terrain;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+import engine.Window;
+import engine.worldFile;
+import steve.Steve;
+
 public class Chunk {
     public static int chunkSize = 16, numberOfChunksLoadedOnScreen = 0;
+
+    public static String getChunkID(){
+        File chunkFile = new File("Java Minecraft2d Final\\src\\Saves\\" + worldFile.worldFolder + "\\chunks.txt");
+        String data = "";
+        try {
+            Scanner read = new Scanner(chunkFile);
+            while(read.hasNextLine()){
+                data = read.nextLine();
+                if(data.contains(""+Steve.getSteveChunkNum(-Window.xmoved/50)*16)){ //we are checking if the chunk has alr been loaded before writing the chunks info to file
+                    return data;
+                }
+            }
+            read.close();
+        } catch (FileNotFoundException e) {
+        }
+        return null;
+    }
 }

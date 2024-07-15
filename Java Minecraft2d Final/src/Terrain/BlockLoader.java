@@ -1,17 +1,18 @@
 package Terrain;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 import engine.Window;
 
 public class BlockLoader {
     
-    static int maxChunks = 4;
+    static int maxChunks = 3;
     static int chunkWidth = 16; // Width of each chunk in blocks
     static int chunkSize = chunkWidth * 50; // Width of each chunk in pixels
     static int topCornerX = 0;
     static int prevXmoved = 0;
-    static int chunkstoGen = 0, tempMoved = 0;
+    static int chunkstoGen = 1, tempMoved = 0;
 
 
     public static void Loader(Graphics2D g) {
@@ -32,10 +33,11 @@ public class BlockLoader {
             GrassBlock.placeBlock(g, currentChunkX);
             DirtBlock.placeBlock(g, currentChunkX);
             StoneBlock.placeBlock(g, currentChunkX);
+            g.setColor(Color.red);
+            g.drawRect((currentChunkX)+ Window.xmoved, 0, 50*16, 720);
         }
 
-        // Optionally, render chunk outlines for debugging
-        // g.setColor(Color.red);
-        // g.drawRect(topCornerX * 50 + Window.xmoved, 0, (topCornerX + 16) * 50 + Window.xmoved, 720);
+        // render chunk outlines for debugging
+       
     }
 }

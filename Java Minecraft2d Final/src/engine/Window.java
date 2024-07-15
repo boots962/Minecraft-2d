@@ -8,11 +8,14 @@ import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 
+import Hud.F3Men;
 import Terrain.BlockLoader;
+import Terrain.Chunk;
 import Terrain.DirtBlock;
 import Terrain.GrassBlock;
 import Terrain.StoneBlock;
 import res.textures.Textures;
+import steve.Steve;
 
 public class Window extends Canvas implements Runnable {
     public static int height = 720, width = 1280, renderedTimes = 0, xmoved = 0;
@@ -49,15 +52,12 @@ public class Window extends Canvas implements Runnable {
 			prev = curtime;
 			unproc += pasttime/1000000000.0;
 			while(unproc >secondsPer) {
-				
-				
+				unproc -= secondsPer;
 				ticked = true;
 				tickCount++;
 				if(tickCount %60 == 0) {
-                    
-					unproc -= secondsPer;
+					
 					framesA = frames;
-                    title = "Frames" + framesA;
 					prev +=1000;
 					frames = 0;
 				}
@@ -84,11 +84,17 @@ public class Window extends Canvas implements Runnable {
 			return;
 		}
 		g = (Graphics2D) bs.getDrawGraphics();
+
         g.setColor(Color.GRAY);
         g.fillRect(0, 0, width, height);
+        g.setColor(Color.BLACK);
         
+        int x = -xmoved/50;
+        int y = 0;
+        if(InputHandler.F3) F3Men.renderF3(g,framesA, x, y, Steve.getSteveChunkNum(x),Chunk.getChunkID(),"1.0Pre-Release (Vanilla)");
+
         BlockLoader.Loader(g);
-        renderedTimes++;
+        Steve.renderSteve();
         g.dispose();
         bs.show();
     }

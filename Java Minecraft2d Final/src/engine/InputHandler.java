@@ -10,7 +10,8 @@ import java.awt.event.MouseMotionListener;
 
 
 public class InputHandler implements KeyListener, MouseListener, FocusListener, MouseMotionListener{
-    public static int walkSpeed = 10;
+    public static int walkSpeed = 3;
+    public static boolean F3 = false;
     @Override
     public void mouseDragged(MouseEvent e) {
     }
@@ -61,6 +62,9 @@ public class InputHandler implements KeyListener, MouseListener, FocusListener, 
                 break;
             case KeyEvent.VK_D:
                 Window.xmoved-= walkSpeed;
+                break;
+            case KeyEvent.VK_F3:
+                F3 = !F3;
                 break;
         }
     }

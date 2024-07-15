@@ -8,12 +8,13 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class worldFile {
-    private static String worldFolder = "";
+    public static String worldFolder = "";
     public static int seed;
 
     public static void createDir(){ //creates the directory and the info file 
         String data = "";
         File numworld = new File("Java Minecraft2d Final\\src\\num2y");
+    
         try{
             Scanner read = new Scanner(numworld);
             while(read.hasNextLine()){
@@ -32,7 +33,9 @@ public class worldFile {
             seed = se.nextInt(1000000000); //generates seed
 
             infoWriter.append("Seed: " + seed);
+            infoWriter.append("\n");
             infoWriter.append("Update: " + Window.worldVersion);
+            infoWriter.append("\n");
             infoWriter.append("Difficulty: " + Window.difficulty);
 
             num.close();
@@ -71,6 +74,41 @@ public class worldFile {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public static void chunkBlocks(int x, int y, String BLOCK_TYPE){
+        File chunkFile = new File("Java Minecraft2d Final\\src\\Saves\\" + worldFolder + "\\chunks.txt");
+        
+        try {
+            FileWriter writer = new FileWriter(chunkFile, true);
+            writer.append(""+x);
+            writer.append("\n");
+            writer.append("-" + y + "//" + BLOCK_TYPE); //assums the chunk has not been loaded so it will input the chunkID into the file
+            writer.append("\n");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    
+    }
+
+    public static String getXy(int x, String chunkID){
+        File chunkFile = new File("Java Minecraft2d Final\\src\\Saves\\" + worldFolder + "\\chunks.txt");
+        String data = "";
+        try {
+            Scanner read = new Scanner(chunkFile);
+            
+            while(read.hasNextLine()){
+                data = read.nextLine();
+                if(data.equals(""+x)){
+                    return read.nextLine();
+                }
+            }
+            read.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return data;
     }
 
 }
