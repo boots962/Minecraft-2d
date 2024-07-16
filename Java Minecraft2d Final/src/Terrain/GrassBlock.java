@@ -33,7 +33,7 @@ public class GrassBlock {
                     int y1 = (mult1 * 50) + 100;
                     int x1 = (j * 50) + Window.xmoved;
                    
-                    worldFile.chunkBlocks(x1+Steve.getSteveChunkNum(-Window.xmoved/50), y1, "MINECRAFT:GRASS_BLOCK");
+                    worldFile.chunkBlocks(x1+Steve.getSteveChunkNum(-Window.xmoved/50), y1, "MINECRAFT:GRASS_BLOCK"); //to save the blocks location and type of block
                 }
 
             }

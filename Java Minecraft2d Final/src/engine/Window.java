@@ -37,7 +37,7 @@ public class Window extends Canvas implements Runnable {
         addMouseMotionListener(ih);
     }
     public static void main(String [] args){ //main method 
-        titlepage.init();
+        titlePage.init();
     }
 
     public void run(){ //renders/deals with the fps when the game starts running

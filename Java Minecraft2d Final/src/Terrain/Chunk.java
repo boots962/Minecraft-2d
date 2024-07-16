@@ -11,7 +11,7 @@ import steve.Steve;
 public class Chunk {
     public static int chunkSize = 16, numberOfChunksLoadedOnScreen = 0;
 
-    public static String getChunkID(){
+    public static String getChunkID(){ //generates and sets the chunkID for any new chunk added into the game
         File chunkFile = new File("Java Minecraft2d Final\\src\\Saves\\" + worldFile.worldFolder + "\\chunks.txt");
         String data = "";
         try {

@@ -91,8 +91,8 @@ public class worldFile {
         }
     
     }
-    
-    public static String getXy(int x, String chunkID){
+
+    public static String getXy(int x, String chunkID){ //this returns the y that was saved for the block in the chunk
         File chunkFile = new File("Java Minecraft2d Final\\src\\Saves\\" + worldFolder + "\\chunks.txt");
         String data = "";
         

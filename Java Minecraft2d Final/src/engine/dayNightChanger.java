@@ -13,7 +13,7 @@ public class dayNightChanger {
     private static double x = Window.width/2, y = Window.height, yMove = 2*Math.pow(10, -div), oldY = 350;
 
 
-    public static void renderSun(Graphics2D g2){
+    public static void renderSun(Graphics2D g2){ //day night changer
      
 
         yMove = 1.4*Math.pow(10, -div);

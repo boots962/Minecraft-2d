@@ -18,7 +18,7 @@ public class Steve {
     public static void renderSteve(){
         getStevey();
     }
-    public static int getSteveChunkNum(int x){
+    public static int getSteveChunkNum(int x){ //gets the chunk N
         if(x%16==0){
             steveChunknum = x/16;
             return steveChunknum;
