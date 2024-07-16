@@ -85,9 +85,11 @@ public class Window extends Canvas implements Runnable {
 		}
 		g = (Graphics2D) bs.getDrawGraphics();
 
-        g.setColor(Color.GRAY);
+        
+		g.setColor(dayNightChanger.sky_color());
         g.fillRect(0, 0, width, height);
-        g.setColor(Color.BLACK);
+        dayNightChanger.renderSun(g);
+		g.setColor(Color.GRAY);
         
         int x = -xmoved/50;
         int y = 0;

@@ -81,9 +81,9 @@ public class worldFile {
         
         try {
             FileWriter writer = new FileWriter(chunkFile, true);
-            writer.append(""+x);
+            writer.append("x:"+x);
             writer.append("\n");
-            writer.append("-" + y + "//" + BLOCK_TYPE); //assums the chunk has not been loaded so it will input the chunkID into the file
+            writer.append(y + "//" + BLOCK_TYPE); //assums the chunk has not been loaded so it will input the chunkID into the file
             writer.append("\n");
             writer.close();
         } catch (IOException e) {
@@ -91,18 +91,25 @@ public class worldFile {
         }
     
     }
-
+    
     public static String getXy(int x, String chunkID){
         File chunkFile = new File("Java Minecraft2d Final\\src\\Saves\\" + worldFolder + "\\chunks.txt");
         String data = "";
+        
         try {
             Scanner read = new Scanner(chunkFile);
-            
+            boolean inchunk = false;
             while(read.hasNextLine()){
                 data = read.nextLine();
-                if(data.equals(""+x)){
-                    return read.nextLine();
+                if(data.equals(chunkID)){
+                    inchunk = true;
                 }
+                if(inchunk){
+                    if(data.equals(""+x)){
+                        return read.nextLine();
+                    }
+                }
+                
             }
             read.close();
         } catch (FileNotFoundException e) {

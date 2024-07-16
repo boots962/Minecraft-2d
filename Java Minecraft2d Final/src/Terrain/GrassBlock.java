@@ -26,13 +26,14 @@ public class GrassBlock {
                 chunkID = "x-"+Window.xmoved/50;
             }
             if(!worldFile.chunkInfo(chunkID)){ //checks if chunk has alr been accessed 
+                
                 for (int j = Steve.getSteveChunkNum(-Window.xmoved/50)*16; j < (Steve.getSteveChunkNum(-Window.xmoved/50)*16+16); j++){
                     
-                    int mult1 = ((int) Math.abs((((Perlin.func(j)) * 50) + 49) / 50 * 50)) / 10;
+                    int mult1 = ((int) Math.abs((((Perlin.func(j)) * 50) + 50) / 50 * 50)) / 10;
                     int y1 = (mult1 * 50) + 100;
                     int x1 = (j * 50) + Window.xmoved;
-                    System.out.println(y1);
-                    worldFile.chunkBlocks(x1, y1, "MINECRAFT:GRASS_BLOCK");
+                   
+                    worldFile.chunkBlocks(x1+Steve.getSteveChunkNum(-Window.xmoved/50), y1, "MINECRAFT:GRASS_BLOCK");
                 }
 
             }

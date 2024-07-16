@@ -13,7 +13,7 @@ public class Steve {
     
     }
     public static void getStevey(){
-        System.out.println(worldFile.getXy(Stevex, null));
+        
     }
     public static void renderSteve(){
         getStevey();
