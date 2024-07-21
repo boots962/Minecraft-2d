@@ -91,12 +91,12 @@ public class Window extends Canvas implements Runnable {
         dayNightChanger.renderSun(g);
 		g.setColor(Color.GRAY);
         
-        int x = -xmoved/50;
-        int y = 0;
+        int x = Steve.Stevex;
+        int y = Steve.Stevey;
         if(InputHandler.F3) F3Men.renderF3(g,framesA, x, y, Steve.getSteveChunkNum(x),Chunk.getChunkID(),"1.0Pre-Release (Vanilla)");
 
         BlockLoader.Loader(g);
-        Steve.renderSteve();
+        Steve.renderSteve(g);
         g.dispose();
         bs.show();
     }
