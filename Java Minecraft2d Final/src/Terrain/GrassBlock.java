@@ -1,5 +1,6 @@
 package Terrain;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import engine.Window;
 import engine.worldFile;
@@ -40,8 +41,16 @@ public class GrassBlock {
             // int caveY = ((int) Math.abs((((Perlin.caveFunc(i)) * 50) + 49) / 50 * 50)) / 10;
             //    caveY=(caveY * 50) + 100;;
             if (x >= 0 && x <= 1200 ) {
+                if(y>Steve.Stevey){
+                    Color col = g.getColor();
+                    g.setColor(Color.DARK_GRAY);
+                    g.fillRect(x, y, 50, 50);
+                    g.setColor(col);
+                    continue;
+                }
                 g.drawImage(Textures.grass, x, y, null);
             }
+
         }
     }
 }

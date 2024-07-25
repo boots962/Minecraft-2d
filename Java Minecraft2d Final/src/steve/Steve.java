@@ -1,9 +1,11 @@
 package steve;
 
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 
 import Terrain.Chunk;
 import Terrain.GrassBlock;
+import engine.InputHandler;
 import engine.Window;
 import engine.worldFile;
 import res.textures.Textures;
@@ -22,11 +24,21 @@ public class Steve {
         return Stevey;
     }
     public static void renderSteve(Graphics2D g){
+
         getStevey();
         int actualY = getStevey()-Textures.steve.getHeight();
         g.drawImage(Textures.steve, getStevex()+100, actualY, null);
+        int overY = 0;
         int steveHeady = actualY-Textures.steveHead.getHeight();
-        g.drawImage(Textures.steveHead, getStevex()+100, steveHeady, null);
+        
+        double theta = Math.atan2((InputHandler.mousey - steveHeady), (InputHandler.mousex - getStevex() + 100));
+        AffineTransform originalTransform = g.getTransform();
+        int headCenterX = getStevex() + 100 + Textures.steveHead.getWidth() / 2;
+        int headCenterY = steveHeady + Textures.steveHead.getHeight() / 2;
+        g.rotate(theta, headCenterX, headCenterY); // Rotate around the center of the head
+        g.drawImage(Textures.steveHead, getStevex() + 100, steveHeady, null);
+        g.setTransform(originalTransform);
+    
     }
     public static int getSteveChunkNum(int x){ //gets the chunk N
         if(x%16==0){
