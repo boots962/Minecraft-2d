@@ -114,7 +114,7 @@ public class worldFile {
                         tempMoved=0;
                     }
                     if(data.equals("x:"+tempMoved)){ //getting correct x now
-                        System.out.println(tempMoved);
+                        
                         return read.nextLine();
                     }
                 }
