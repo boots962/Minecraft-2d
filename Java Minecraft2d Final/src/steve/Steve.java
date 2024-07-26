@@ -33,10 +33,16 @@ public class Steve {
         
         double theta = Math.atan2((InputHandler.mousey - steveHeady), (InputHandler.mousex - getStevex() + 100));
         AffineTransform originalTransform = g.getTransform();
+        int headmoveback = 0;
+        if(theta<-0.4){
+            headmoveback=-10;
+        }else{
+            headmoveback=0;
+        }
         int headCenterX = getStevex() + 100 + Textures.steveHead.getWidth() / 2;
         int headCenterY = steveHeady + Textures.steveHead.getHeight() / 2;
         g.rotate(theta, headCenterX, headCenterY); // Rotate around the center of the head
-        g.drawImage(Textures.steveHead, getStevex() + 100, steveHeady, null);
+        g.drawImage(Textures.steveHead, getStevex() + 100+headmoveback , steveHeady, null);
         g.setTransform(originalTransform);
     
     }

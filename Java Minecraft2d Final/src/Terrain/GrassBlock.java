@@ -1,6 +1,5 @@
 package Terrain;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import engine.Window;
 import engine.worldFile;
@@ -33,24 +32,17 @@ public class GrassBlock {
                     int mult1 = ((int) Math.abs((((Perlin.func(j)) * 50) + 50) / 50 * 50)) / 10;
                     int y1 = (mult1 * 50) + 100;
                     int x1 = (j * 50) + Window.xmoved;
-                   
-                    worldFile.chunkBlocks(x1+Steve.getSteveChunkNum(-Window.xmoved/50), y1, "MINECRAFT:GRASS_BLOCK"); //to save the blocks location and type of block
+                    
+                    worldFile.chunkBlocks(x1, y1, "MINECRAFT:GRASS_BLOCK"); //to save the blocks location and type of block
                 }
 
             }
             // int caveY = ((int) Math.abs((((Perlin.caveFunc(i)) * 50) + 49) / 50 * 50)) / 10;
             //    caveY=(caveY * 50) + 100;;
             if (x >= 0 && x <= 1200 ) {
-                if(y>Steve.Stevey){
-                    Color col = g.getColor();
-                    g.setColor(Color.DARK_GRAY);
-                    g.fillRect(x, y, 50, 50);
-                    g.setColor(col);
-                    continue;
-                }
                 g.drawImage(Textures.grass, x, y, null);
             }
-
+            
         }
     }
 }

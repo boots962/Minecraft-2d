@@ -95,6 +95,7 @@ public class worldFile {
     }
     private static int tempMoved = 0;
     public static String getXy(int x, String chunkID){ //this returns the y that was saved for the block in the chunk
+        int test=0;
         File chunkFile = new File("Java Minecraft2d Final\\src\\Saves\\" + worldFolder + "\\chunks.txt");
         String data = "";
         int tempx = -Window.xmoved/50;
@@ -102,8 +103,10 @@ public class worldFile {
             Scanner read = new Scanner(chunkFile);
             boolean inchunk = false;
             while(read.hasNextLine()){
+                test++;
                 data = read.nextLine();
                 if(data.equals(chunkID)){
+                    System.out.println(test);
                     inchunk = true;
                 }
                 if(inchunk){  
