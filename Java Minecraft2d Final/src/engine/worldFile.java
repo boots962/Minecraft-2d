@@ -80,7 +80,7 @@ public class worldFile {
 
     public static void chunkBlocks(int x, int y, String BLOCK_TYPE){
         File chunkFile = new File("Java Minecraft2d Final\\src\\Saves\\" + worldFolder + "\\chunks.txt");
-        
+        x+=Steve.getSteveChunkNum(Steve.getStevex()+2);
         try {
             FileWriter writer = new FileWriter(chunkFile, true);
             writer.append("x:"+x);
@@ -94,40 +94,43 @@ public class worldFile {
     
     }
     private static int tempMoved = 0;
-    public static String getXy(int x, String chunkID){ //this returns the y that was saved for the block in the chunk
-        int test=0;
+    public static String getXy(int x, String chunkID) {
         File chunkFile = new File("Java Minecraft2d Final\\src\\Saves\\" + worldFolder + "\\chunks.txt");
         String data = "";
-        int tempx = -Window.xmoved/50;
+        int tempx = -Window.xmoved / 50;
         try {
             Scanner read = new Scanner(chunkFile);
             boolean inchunk = false;
-            while(read.hasNextLine()){
-                test++;
+            while (read.hasNextLine()) {
                 data = read.nextLine();
-                if(data.equals(chunkID)){
-                    System.out.println(test);
+                if (data.equals(chunkID)) {
                     inchunk = true;
                 }
-                if(inchunk){  
-                    tempMoved = (-Window.xmoved)-(Steve.getSteveChunkNum(tempx)*800);
-                    tempMoved = ((tempMoved+49)/50 * 50) + 100;
-                    
-                    if(tempMoved %800==0 && tempMoved !=1){
-                        tempMoved=0;
+                if (inchunk) {
+                    tempMoved = (-Window.xmoved) - (Steve.getSteveChunkNum(tempx) * 800);
+                    tempMoved = ((tempMoved + 49) / 50) * 50 + 100;
+    
+                    if (tempMoved % 800 == 0 && tempMoved != 1) {
+                        tempMoved = 0;
                     }
-                    if(data.equals("x:"+tempMoved)){ //getting correct x now
+    
+                    // Ensure to parse x correctly and match it with the stored x value
+                    if (data.equals("x:" + tempMoved)) {
+                        // Read the next line which should be the y coordinate and block type
                         
-                        return read.nextLine();
+                        if (read.hasNextLine()) {
+                            String y = read.nextLine();
+                            return y; // Return y and block type
+                        }
                     }
                 }
-                
             }
             read.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        return data;
+        return data; // Return empty or error data if not found
     }
+    
 
 }

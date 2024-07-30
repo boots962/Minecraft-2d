@@ -15,7 +15,7 @@ public class Steve {
     public static String blockType_Standing = "";
 
     public static int getStevex(){
-        return -Window.xmoved/50;
+        return (-Window.xmoved/50) +2;
     }
     public static int getStevey(){
         String [] info = worldFile.getXy(getStevex(), Chunk.getChunkID()).split("//");
