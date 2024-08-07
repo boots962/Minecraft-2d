@@ -15,6 +15,7 @@ import Terrain.DirtBlock;
 import Terrain.GrassBlock;
 import Terrain.StoneBlock;
 import res.textures.Textures;
+import steve.MineBlock;
 import steve.Steve;
 
 public class Window extends Canvas implements Runnable {

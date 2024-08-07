@@ -10,11 +10,12 @@ import java.awt.event.MouseMotionListener;
 
 
 public class InputHandler implements KeyListener, MouseListener, FocusListener, MouseMotionListener{
-    public static int walkSpeed = 3, mousex, mousey;
+    public static int walkSpeed = 3, mousex, mousey, mouseClickedx, mouseClickedy, blocksMined = 0;
     public static boolean F3 = false;
     
     @Override
     public void mouseDragged(MouseEvent e) {
+
     }
 
     @Override
@@ -33,10 +34,19 @@ public class InputHandler implements KeyListener, MouseListener, FocusListener, 
 
     @Override
     public void mouseClicked(MouseEvent e) {
+        int button = e.getButton();
+        switch (button) {
+            case MouseEvent.BUTTON1:
+               
+                mouseClickedx = e.getX();
+                mouseClickedy = e.getY();
+                break;
+        }
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
+        
     }
 
     @Override

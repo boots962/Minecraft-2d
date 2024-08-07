@@ -10,6 +10,8 @@ import engine.Window;
 import engine.worldFile;
 import res.textures.Textures;
 
+import steve.MineBlock;
+
 public class Steve {
     public static int steveChunknum = 0, Stevey = 0;
     public static String blockType_Standing = "";
@@ -21,8 +23,10 @@ public class Steve {
         String [] info = worldFile.getXy(getStevex(), Chunk.getChunkID()).split("//");
         Stevey = Integer.parseInt(info[0]);
         blockType_Standing = info[1];
+        
         return Stevey;
     }
+    
     public static void renderSteve(Graphics2D g){
 
         getStevey();

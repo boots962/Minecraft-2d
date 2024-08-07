@@ -20,7 +20,8 @@ public class GrassBlock {
             int mult = ((int) Math.abs((((Perlin.func(i)) * 50) + 49) / 50 * 50)) / 10;
             int y = (mult * 50) + 100;
             int x = (i * 50) + Window.xmoved;
-
+            
+          
             String chunkID = ""; //chunkID
             if((Window.xmoved/50)%16==0){ //if first loop
                 chunkID = "x-"+Window.xmoved/50;

@@ -17,8 +17,8 @@ public class Chunk {
         try {
             Scanner read = new Scanner(chunkFile);
             while(read.hasNextLine()){
-                data = read.nextLine();
-                if(data.contains(""+Steve.getSteveChunkNum(Steve.getStevex()+2)*16)){ //we are checking if the chunk has alr been loaded before writing the chunks info to file
+                data = read.nextLine(); 
+                if(data.contains(""+Steve.getSteveChunkNum((-Window.xmoved/50)+2)*16)){ //we are checking if the chunk has alr been loaded before writing the chunks info to file
                     return data;
                 }
             }

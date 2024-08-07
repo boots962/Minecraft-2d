@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
+import steve.MineBlock;
 import steve.Steve;
 
 public class worldFile {
@@ -53,6 +54,7 @@ public class worldFile {
 
 
     public static boolean chunkInfo(String chunkID){
+        
         File chunkFile = new File("Java Minecraft2d Final\\src\\Saves\\" + worldFolder + "\\chunks.txt");
         String data = "";
         try {
@@ -93,6 +95,7 @@ public class worldFile {
         }
     
     }
+    
     private static int tempMoved = 0;
     public static String getXy(int x, String chunkID) {
         File chunkFile = new File("Java Minecraft2d Final\\src\\Saves\\" + worldFolder + "\\chunks.txt");
@@ -101,9 +104,12 @@ public class worldFile {
         try {
             Scanner read = new Scanner(chunkFile);
             boolean inchunk = false;
+            
             while (read.hasNextLine()) {
                 data = read.nextLine();
-                if (data.equals(chunkID)) {
+                String falseChunkId = "" + Steve.getSteveChunkNum(Steve.getStevex())*16;
+                
+                if (data.contains(falseChunkId)) {
                     inchunk = true;
                 }
                 if (inchunk) {
