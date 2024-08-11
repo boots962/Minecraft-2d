@@ -7,12 +7,12 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
-import Hud.F3Men;
 import steve.Steve;
 
 public class worldFile {
     public static String worldFolder = "";
     public static int seed;
+    public static String prevx = "", prevy = "";
 
     public static void createDir(){ //creates the directory and the info file 
         String data = "";
@@ -55,85 +55,74 @@ public class worldFile {
     }
 
 
-    public static boolean chunkInfo(String chunkID){
-        
-        File chunkFile = new File("Java Minecraft2d Final\\src\\Saves\\" + worldFolder + "\\chunks.txt");
-        String data = "";
-        try {
-            Scanner read = new Scanner(chunkFile);
-            while(read.hasNextLine()){
-                data = read.nextLine();
-                if(data.equals(chunkID)){ //we are checking if the chunk has alr been loaded before writing the chunks info to file
-                    return true;
-                }
-                
-            }
-            read.close();
-        } catch (FileNotFoundException e) {
-        }
-        
-        try {
-            FileWriter writer = new FileWriter(chunkFile, true);
-            writer.append(chunkID); //assums the chunk has not been loaded so it will input the chunkID into the file
-            writer.append("\n");
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    public static void chunkBlocks(int x, int y, String BLOCK_TYPE){
-       
-        File chunkFile = new File("Java Minecraft2d Final\\src\\Saves\\" + worldFolder + "\\chunks.txt");
-        
-        try {
-            FileWriter writer = new FileWriter(chunkFile, true);
-            writer.append(Steve.getSteveChunkNum(Steve.getStevex())+ "%" + x + "%" + y + "%" + BLOCK_TYPE); //assums the chunk has not been loaded so it will input the chunkID into the file
-            writer.append("\n");
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    
-    }
+  
     public static int updownDistancemodifier = 100;
     public static int tempMoved = 0;
     public static String getXy(int x, String chunkID) {
         File chunkFile = new File("Java Minecraft2d Final\\src\\Saves\\" + worldFolder + "\\chunks.txt");
         String data = "";
-        int tempx = -Window.xmoved / 50;
         try {
             Scanner read = new Scanner(chunkFile);
             while (read.hasNextLine()) {
                 
-                tempMoved = (-Window.xmoved) - (Steve.getSteveChunkNum(tempx) * 800);
-                tempMoved = ((tempMoved) / 50) * 50 + updownDistancemodifier;
-
-                if (tempMoved % 750 == 0 && tempMoved != 1) {
+                tempMoved = (-Window.xmoved) - (Steve.getSteveChunkNum(Steve.getStevex()) * 800);
+                tempMoved = ((tempMoved) / 50) * 50 + 100;
+                if(Integer.toString(tempMoved).equals(prevx)){
+                    return prevy;
+                }
+                if (tempMoved % 800 == 0 && tempMoved != 1) {
                     tempMoved = 0;
                 }
-                if(tempMoved > 750){
-                    tempMoved = tempMoved-750;
+                if(tempMoved > 800){
+                    tempMoved = tempMoved-800;
                 }
                 data = read.nextLine();
                 if(!data.contains("%")){
                     continue;
                 }
-                int chunknum = Steve.getSteveChunkNum(Steve.getStevex());
                 
                 String [] parts = data.split("%");
-                if(parts[0].equals(String.valueOf(Steve.getSteveChunkNum(-Window.xmoved/50))) && parts[1].equals(String.valueOf(worldFile.tempMoved))){
-                    System.out.println(parts[0]);
+                if(parts[0].equals(String.valueOf(Steve.getSteveChunkNum((-Window.xmoved/50)+2))) && parts[1].equals(String.valueOf(worldFile.tempMoved)) ){
+                    
+                    prevx = Integer.toString(tempMoved);
+                    prevy = parts[2];
                     return parts[2];
                 }
             }
             read.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        
         }
         return "0"; // Return empty or error data if not found
     }
-    
+    private static int tempprevx = 0, tempprevy = 0;
+    public static String getBlockType(int chunkNum, int x, int y){
+        
+        x = (x/50)*50;
+        y = (y/50) *50;
+        String data = "";
+        File file = new File("Java Minecraft2d Final\\src\\Saves\\" + worldFolder + "\\chunks.txt");
+        if(tempprevx == x && tempprevy == y){
+            return Steve.blockType_Standing;
+        }
+        try {
+            Scanner reader = new Scanner(file);
+            while(reader.hasNextLine()){
+                data = reader.nextLine();
+                String [] parts = data.split("%");
+                if(parts[0].equals(String.valueOf(chunkNum)) && parts[1].equals(String.valueOf(tempMoved)) && parts[2].equals(String.valueOf(y))){
+                    
+                    tempprevx =x;
+                    tempprevy = y;
+                    return parts[3];
+                }
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
 
 }

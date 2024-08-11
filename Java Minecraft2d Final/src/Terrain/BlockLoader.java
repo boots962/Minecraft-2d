@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 import engine.Window;
+import steve.Steve;
 
 public class BlockLoader {
     
@@ -39,5 +40,22 @@ public class BlockLoader {
 
         // render chunk outlines for debugging
        
+    }
+
+    public static void addBlocks(int depth, String blockType, int ymod){
+        for (int u = Steve.getSteveChunkNum(Steve.getStevex())*16; u <= (Steve.getSteveChunkNum(Steve.getStevex())*16+16); u++){
+                    int o = 0;
+                    while(o < depth){
+                    int mult1 = ((int) Math.abs((((Perlin.func(u)) * 50) + 49) / 50 * 50)) / 10;
+                    int y1 = (mult1 * 50) + 50 + (50 * u) + (100)+ymod;
+                    int x1 = (u * 50);
+                    if(x1 > 800 || x1==800&&u==Steve.getSteveChunkNum(Steve.getStevex())*16){
+                        int temp = x1/800;
+                        x1 -= (temp*800);
+                    }
+                    Chunk.chunkBlocks(x1, y1, blockType); //to save the blocks location and type of block
+                    o++;
+                    }
+                }
     }
 }

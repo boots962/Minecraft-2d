@@ -21,7 +21,7 @@ public class StoneBlock {
                 int mult = ((int) Math.abs((((Perlin.func(i)) * 50) + 49) / 50 * 50)) / 10;
                 int y = (mult * 50) + (50 * j) + 300;
                 int x = (i * 50) + Window.xmoved; //x variables
-
+                
                 
 
             //     int caveY = ((int) Math.abs((((Perlin.caveFunc(i)) * 50) + 49) / 50 * 50)) / 10;

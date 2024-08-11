@@ -21,18 +21,21 @@ public class GrassBlock {
             int y = (mult * 50) + 100;
             int x = (i * 50) + Window.xmoved;
             
-          
             String chunkID = ""; //chunkID
             chunkID = "x-"+ Steve.getSteveChunkNum(Steve.getStevex());
             
-            if(!worldFile.chunkInfo(chunkID) && -Window.xmoved/50 !=1){ //checks if chunk has alr been accessed 
+            if(!Chunk.chunkInfo(chunkID) && -Window.xmoved/50 !=1){ //checks if chunk has alr been accessed 
                 
-                for (int j = Steve.getSteveChunkNum(-Window.xmoved/50)*16; j < (Steve.getSteveChunkNum(-Window.xmoved/50)*16+16); j++){
+                for (int j = Steve.getSteveChunkNum(Steve.getStevex())*16; j <= (Steve.getSteveChunkNum(Steve.getStevex())*16+16); j++){
                     
-                    int mult1 = ((int) Math.abs((((Perlin.func(j)) * 50) + 50) / 50 * 50)) / 10;
+                    int mult1 = ((int) Math.abs((((Perlin.func(j)) * 50) + 49) / 50 * 50)) / 10;
                     int y1 = (mult1 * 50) + 100;
                     int x1 = (j * 50);
-                    worldFile.chunkBlocks(x1, y1, "MINECRAFT:GRASS_BLOCK"); //to save the blocks location and type of block
+                    if(x1 > 800 || x1==800&&j==Steve.getSteveChunkNum(Steve.getStevex())*16){
+                        int temp = x1/800;
+                        x1 -= (temp*800);
+                    }
+                    Chunk.chunkBlocks(x1, y1, "MINECRAFT:GRASS_BLOCK"); //to save the blocks location and type of block
                 }
 
             }
