@@ -84,13 +84,12 @@ public class worldFile {
     }
 
     public static void chunkBlocks(int x, int y, String BLOCK_TYPE){
+       
         File chunkFile = new File("Java Minecraft2d Final\\src\\Saves\\" + worldFolder + "\\chunks.txt");
-        x+=Steve.getSteveChunkNum(Steve.getStevex()+2);
+        
         try {
             FileWriter writer = new FileWriter(chunkFile, true);
-            writer.append("x:"+x);
-            writer.append("\n");
-            writer.append(y + "//" + BLOCK_TYPE); //assums the chunk has not been loaded so it will input the chunkID into the file
+            writer.append(Steve.getSteveChunkNum(Steve.getStevex())+ "%" + x + "%" + y + "%" + BLOCK_TYPE); //assums the chunk has not been loaded so it will input the chunkID into the file
             writer.append("\n");
             writer.close();
         } catch (IOException e) {
@@ -98,64 +97,42 @@ public class worldFile {
         }
     
     }
-    public static int updownDistancemodifier = 150;
-    private static int tempMoved = 0;
+    public static int updownDistancemodifier = 100;
+    public static int tempMoved = 0;
     public static String getXy(int x, String chunkID) {
         File chunkFile = new File("Java Minecraft2d Final\\src\\Saves\\" + worldFolder + "\\chunks.txt");
         String data = "";
         int tempx = -Window.xmoved / 50;
         try {
             Scanner read = new Scanner(chunkFile);
-            boolean inchunk = false;
-            
             while (read.hasNextLine()) {
-                data = read.nextLine();
-                String falseChunkId = "" + Steve.getSteveChunkNum(Steve.getStevex())*16;
+                
+                tempMoved = (-Window.xmoved) - (Steve.getSteveChunkNum(tempx) * 800);
+                tempMoved = ((tempMoved) / 50) * 50 + updownDistancemodifier;
 
-                if (data.contains(falseChunkId)) {
-                    inchunk = true;
+                if (tempMoved % 750 == 0 && tempMoved != 1) {
+                    tempMoved = 0;
                 }
-                if (inchunk) {
-                    tempMoved = (-Window.xmoved) - (Steve.getSteveChunkNum(tempx) * 800);
-                    tempMoved = ((tempMoved + 49) / 50) * 50 + updownDistancemodifier;
-    
-                    if (tempMoved % 800 == 0 && tempMoved != 1) {
-                        tempMoved = 0;
-                    }
-                    
-                    // Ensure to parse x correctly and match it with the stored x value
-                    if (data.equals("x:" + tempMoved)) {
-                        // Read the next line which should be the y coordinate and block type
-                        
-                        if (read.hasNextLine()) {
-                            String y = read.nextLine();
-                            
-                            if(F3Men.direction.equals("North")){
-                                String tempChnkId = ""+ Steve.getSteveChunkNum(Steve.getStevex()+16)*16;
-                                boolean inNextChunk = false;
-                                if(data.contains(tempChnkId)){
-                                    if(inchunk || inNextChunk){
-                                        int tempxmoved = tempMoved+100;
-                                        if(tempxmoved %800 == 0){
-                                            tempxmoved = 0;
-                                        }
-                                        if(data.equals("x:" + tempxmoved)){
-                                            System.out.println(read.nextLine());
-                                        }
-                                    }
-                                }
-                            
-                        }
-                            return y; // Return y and block type
-                        }
-                    }
+                if(tempMoved > 750){
+                    tempMoved = tempMoved-750;
+                }
+                data = read.nextLine();
+                if(!data.contains("%")){
+                    continue;
+                }
+                int chunknum = Steve.getSteveChunkNum(Steve.getStevex());
+                
+                String [] parts = data.split("%");
+                if(parts[0].equals(String.valueOf(Steve.getSteveChunkNum(-Window.xmoved/50))) && parts[1].equals(String.valueOf(worldFile.tempMoved))){
+                    System.out.println(parts[0]);
+                    return parts[2];
                 }
             }
             read.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        return data; // Return empty or error data if not found
+        return "0"; // Return empty or error data if not found
     }
     
 

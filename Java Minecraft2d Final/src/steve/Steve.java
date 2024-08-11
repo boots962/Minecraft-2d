@@ -18,11 +18,7 @@ public class Steve {
         return (-Window.xmoved/50) +2;
     }
     public static int getStevey(){
-        String [] info = worldFile.getXy(getStevex(), Chunk.getChunkID()).split("//");
-        Stevey = Integer.parseInt(info[0]);
-        blockType_Standing = info[1];
-        
-        return Stevey;
+        return Integer.parseInt(worldFile.getXy(getStevex(), Chunk.getChunkID()));
     }
     
     public static void renderSteve(Graphics2D g){
