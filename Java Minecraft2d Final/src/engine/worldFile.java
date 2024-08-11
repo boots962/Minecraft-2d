@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
+import Hud.F3Men;
 import steve.Steve;
 
 public class worldFile {
@@ -97,7 +98,7 @@ public class worldFile {
         }
     
     }
-    
+    public static int updownDistancemodifier = 150;
     private static int tempMoved = 0;
     public static String getXy(int x, String chunkID) {
         File chunkFile = new File("Java Minecraft2d Final\\src\\Saves\\" + worldFolder + "\\chunks.txt");
@@ -110,24 +111,41 @@ public class worldFile {
             while (read.hasNextLine()) {
                 data = read.nextLine();
                 String falseChunkId = "" + Steve.getSteveChunkNum(Steve.getStevex())*16;
-                
+
                 if (data.contains(falseChunkId)) {
                     inchunk = true;
                 }
                 if (inchunk) {
                     tempMoved = (-Window.xmoved) - (Steve.getSteveChunkNum(tempx) * 800);
-                    tempMoved = ((tempMoved + 49) / 50) * 50 + 100;
+                    tempMoved = ((tempMoved + 49) / 50) * 50 + updownDistancemodifier;
     
                     if (tempMoved % 800 == 0 && tempMoved != 1) {
                         tempMoved = 0;
                     }
-    
+                    
                     // Ensure to parse x correctly and match it with the stored x value
                     if (data.equals("x:" + tempMoved)) {
                         // Read the next line which should be the y coordinate and block type
                         
                         if (read.hasNextLine()) {
                             String y = read.nextLine();
+                            
+                            if(F3Men.direction.equals("North")){
+                                String tempChnkId = ""+ Steve.getSteveChunkNum(Steve.getStevex()+16)*16;
+                                boolean inNextChunk = false;
+                                if(data.contains(tempChnkId)){
+                                    if(inchunk || inNextChunk){
+                                        int tempxmoved = tempMoved+100;
+                                        if(tempxmoved %800 == 0){
+                                            tempxmoved = 0;
+                                        }
+                                        if(data.equals("x:" + tempxmoved)){
+                                            System.out.println(read.nextLine());
+                                        }
+                                    }
+                                }
+                            
+                        }
                             return y; // Return y and block type
                         }
                     }

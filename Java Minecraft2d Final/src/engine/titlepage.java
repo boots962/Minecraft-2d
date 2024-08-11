@@ -16,7 +16,7 @@ import res.textures.Textures;
 
 
 public class titlePage extends Canvas implements Runnable, MouseListener{
-    
+    private static Textures t;
     public static int Width = 800, Height = Width*9/16;
     public boolean running = false;
     private static JFrame frame;
@@ -24,7 +24,7 @@ public class titlePage extends Canvas implements Runnable, MouseListener{
     public static Rectangle create, load;
 
     public static void init(){
-       
+        t = new Textures();
         titlePage tp = new titlePage();
         frame = new JFrame("Minecraft2d");
         frame.setSize(Width, Height);
@@ -63,7 +63,7 @@ public class titlePage extends Canvas implements Runnable, MouseListener{
        
         for(int i = 0; i<Width/50; i++){
             for(int j = 0; j<Height/50; j++){
-                g.drawImage(Textures.dirt, i*50, j*50, null);
+                g.drawImage(t.dirt, i*50, j*50, null);
             }
         }
         

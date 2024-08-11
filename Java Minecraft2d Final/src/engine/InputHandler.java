@@ -8,6 +8,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import Hud.F3Men;
+
 
 public class InputHandler implements KeyListener, MouseListener, FocusListener, MouseMotionListener{
     public static int walkSpeed = 3, mousex, mousey, mouseClickedx, mouseClickedy, blocksMined = 0;
@@ -72,9 +74,11 @@ public class InputHandler implements KeyListener, MouseListener, FocusListener, 
             
             case KeyEvent.VK_A:
                 Window.xmoved+= walkSpeed;
+                F3Men.direction = "South";
                 break;
             case KeyEvent.VK_D:
                 Window.xmoved-= walkSpeed;
+                F3Men.direction = "North";
                 break;
             case KeyEvent.VK_F3:
                 F3 = !F3;
