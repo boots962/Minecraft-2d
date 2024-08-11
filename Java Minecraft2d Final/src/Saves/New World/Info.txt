@@ -1,3 +1,0 @@
-Seed: 414064590
-Update: 1.0
-Difficulty: Easy

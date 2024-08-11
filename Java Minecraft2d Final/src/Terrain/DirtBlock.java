@@ -2,7 +2,6 @@ package Terrain;
 
 import java.awt.Graphics2D;
 import engine.Window;
-import engine.worldFile;
 import res.textures.Textures;
 
 public class DirtBlock {

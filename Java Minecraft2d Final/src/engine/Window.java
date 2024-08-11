@@ -2,7 +2,6 @@ package engine;
 
 import java.awt.Canvas;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 
@@ -11,11 +10,7 @@ import javax.swing.JFrame;
 import Hud.F3Men;
 import Terrain.BlockLoader;
 import Terrain.Chunk;
-import Terrain.DirtBlock;
-import Terrain.GrassBlock;
-import Terrain.StoneBlock;
 import res.textures.Textures;
-import steve.MineBlock;
 import steve.Steve;
 
 public class Window extends Canvas implements Runnable {

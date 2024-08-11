@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
-import steve.MineBlock;
 import steve.Steve;
 
 public class worldFile {
@@ -29,8 +28,10 @@ public class worldFile {
             
             File info = new File("Java Minecraft2d Final\\src\\Saves\\" + worldFolder + "\\Info.txt");
             FileWriter infoWriter = new FileWriter(info, true);
-            FileWriter num = new FileWriter(numworld, true);
-            num.append("1");
+            FileWriter num = new FileWriter(numworld);
+            int tempnum = Integer.parseInt(data);
+            tempnum++;
+            num.write(""+tempnum);
             
             Random se = new Random();
             seed = se.nextInt(1000000000); //generates seed
@@ -64,6 +65,7 @@ public class worldFile {
                 if(data.equals(chunkID)){ //we are checking if the chunk has alr been loaded before writing the chunks info to file
                     return true;
                 }
+                
             }
             read.close();
         } catch (FileNotFoundException e) {

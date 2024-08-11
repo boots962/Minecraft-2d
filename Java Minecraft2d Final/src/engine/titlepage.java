@@ -9,24 +9,22 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 
-import javax.swing.JButton;
+
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.event.MouseInputListener;
+
+import res.textures.Textures;
 
 
 public class titlePage extends Canvas implements Runnable, MouseListener{
     
     public static int Width = 800, Height = Width*9/16;
     public boolean running = false;
-    private static res.textures.Textures t;
     private static JFrame frame;
     public static boolean cont = false;
     public static Rectangle create, load;
 
     public static void init(){
        
-        t = new res.textures.Textures();
         titlePage tp = new titlePage();
         frame = new JFrame("Minecraft2d");
         frame.setSize(Width, Height);
@@ -65,7 +63,7 @@ public class titlePage extends Canvas implements Runnable, MouseListener{
        
         for(int i = 0; i<Width/50; i++){
             for(int j = 0; j<Height/50; j++){
-                g.drawImage(t.dirt, i*50, j*50, null);
+                g.drawImage(Textures.dirt, i*50, j*50, null);
             }
         }
         

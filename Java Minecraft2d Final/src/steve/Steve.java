@@ -4,13 +4,11 @@ import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 
 import Terrain.Chunk;
-import Terrain.GrassBlock;
 import engine.InputHandler;
 import engine.Window;
 import engine.worldFile;
 import res.textures.Textures;
 
-import steve.MineBlock;
 
 public class Steve {
     public static int steveChunknum = 0, Stevey = 0;
@@ -32,7 +30,6 @@ public class Steve {
         getStevey();
         int actualY = getStevey()-Textures.steve.getHeight();
         g.drawImage(Textures.steve, getStevex()+100, actualY, null);
-        int overY = 0;
         int steveHeady = actualY-Textures.steveHead.getHeight();
         
         double theta = Math.atan2((InputHandler.mousey - steveHeady), (InputHandler.mousex - getStevex() + 100));
