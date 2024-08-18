@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 import Hud.F3Men;
 import Terrain.BlockLoader;
@@ -88,7 +89,7 @@ public class Window extends Canvas implements Runnable {
 		g.setColor(Color.GRAY);
         
         int x = Steve.getStevex();
-        int y = Steve.Stevey;
+        int y = Steve.getStevey();
         if(InputHandler.F3) F3Men.renderF3(g,framesA, x, y, Steve.getSteveChunkNum(Steve.getStevex()),Chunk.getChunkID(),"1.0Pre-Release (Vanilla)");
 
         BlockLoader.Loader(g);
@@ -98,6 +99,7 @@ public class Window extends Canvas implements Runnable {
     }
 
     public static void create(){//creates window
+        SwingUtilities.invokeLater(() -> {
         Window window = new Window();
         JFrame frame = new JFrame(title);
         frame.setSize(width, height);
@@ -107,6 +109,7 @@ public class Window extends Canvas implements Runnable {
         frame.add(window);
         frame.setVisible(true);
         window.start();
+        });
     } 
 
     

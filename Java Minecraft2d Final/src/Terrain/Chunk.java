@@ -12,9 +12,8 @@ import steve.Steve;
 
 public class Chunk {
     public static int chunkSize = 16, numberOfChunksLoadedOnScreen = 0;
+    static File chunkFile = new File("Java Minecraft2d Final\\src\\Saves\\" + worldFile.worldFolder + "\\chunks.txt");
     public static boolean chunkInfo(String chunkID){
-        
-        File chunkFile = new File("Java Minecraft2d Final\\src\\Saves\\" + worldFile.worldFolder + "\\chunks.txt");
         String data = "";
         try {
             Scanner read = new Scanner(chunkFile);
@@ -42,7 +41,6 @@ public class Chunk {
 
     public static void chunkBlocks(int x, int y, String BLOCK_TYPE){
        
-        File chunkFile = new File("Java Minecraft2d Final\\src\\Saves\\" + worldFile.worldFolder + "\\chunks.txt");
         
         try {
             FileWriter writer = new FileWriter(chunkFile, true);
@@ -58,7 +56,7 @@ public class Chunk {
     
     }
     public static String getChunkID(){ //generates and sets the chunkID for any new chunk added into the game
-        File chunkFile = new File("Java Minecraft2d Final\\src\\Saves\\" + worldFile.worldFolder + "\\chunks.txt");
+        
         String data = "";
         try {
             Scanner read = new Scanner(chunkFile);

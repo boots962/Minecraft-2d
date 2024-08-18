@@ -14,7 +14,7 @@ public class F3Men {
         g.drawRect(0, 0, 150, 100);
         g.setColor(Color.white);
         g.drawString("Game version: " + version, 5, 10);
-        g.drawString("X/" + x + "/Y/" + Steve.getStevey(), 5, 25);
+        g.drawString("X/" + x + "/Y/" + Steve.getStevey()/50, 5, 25);
         g.drawString("FPS/"+fps, 5, 40 );
         g.drawString("CHUNKID:"+chunkID + "/N:" + chunkNum, 5, 55);
         g.drawString("BLOCK_TYPE_STANDING:"+Steve.getBlockType(), 5, 70);

@@ -11,8 +11,10 @@ import res.textures.Textures;
 
 
 public class Steve {
-    public static int steveChunknum = 0, Stevey = 0;
+    public static int steveChunknum = 0, deltay = 0;
     public static String blockType_Standing = getBlockType();
+    private static boolean isJumping = false;
+    private static int jumpStartY = 0;
 
     public static int getStevex(){
         return (-Window.xmoved/50) +2;
@@ -20,10 +22,30 @@ public class Steve {
     public static int getStevey(){
         return Integer.parseInt(worldFile.getXy(getStevex(), Chunk.getChunkID()));
     }
-    
+    public static void jump() {
+        if (!isJumping && deltay == 0) { // Only jump if Steve is not already jumping
+            isJumping = true;
+            jumpStartY = getStevey(); // Record the Y position at the start of the jump
+        }
+    }
     public static void renderSteve(Graphics2D g){
 
         int actualY = getStevey()-Textures.steve.getHeight();
+
+        if (isJumping) {
+            actualY -= InputHandler.jumpheight - deltay;
+            if (deltay < InputHandler.jumpheight) {
+                deltay += 1; // Controls jump speed, adjust as necessary
+            } else {
+                isJumping = false;
+                deltay = 0;
+            }
+        } else {
+            if (deltay > 0) {
+                actualY += deltay;
+                deltay -= 2; // Controls fall speed, adjust as necessary
+            }
+        }
         g.drawImage(Textures.steve, getStevex()+75, actualY, null);
         int steveHeady = actualY-Textures.steveHead.getHeight();
         

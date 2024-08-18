@@ -9,10 +9,11 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import Hud.F3Men;
+import steve.Steve;
 
 
 public class InputHandler implements KeyListener, MouseListener, FocusListener, MouseMotionListener{
-    public static int walkSpeed = 3, mousex, mousey, mouseClickedx, mouseClickedy, blocksMined = 0;
+    public static int walkSpeed = 3, mousex, mousey, mouseClickedx, mouseClickedy, blocksMined = 0, jumpheight = 140;
     public static boolean F3 = false;
     
     @Override
@@ -79,6 +80,9 @@ public class InputHandler implements KeyListener, MouseListener, FocusListener, 
             case KeyEvent.VK_D:
                 Window.xmoved-= walkSpeed;
                 F3Men.direction = "North";
+                break;
+            case KeyEvent.VK_SPACE:
+                Steve.jump();
                 break;
             case KeyEvent.VK_F3:
                 F3 = !F3;

@@ -13,7 +13,8 @@ public class worldFile {
     public static String worldFolder = "";
     public static int seed;
     public static String prevx = "", prevy = "";
-
+    
+    
     public static void createDir(){ //creates the directory and the info file 
         String data = "";
         File numworld = new File("Java Minecraft2d Final\\src\\num2y");
@@ -55,14 +56,15 @@ public class worldFile {
     }
 
 
-  
+    public static File getChunkFile(){
+        return new File("Java Minecraft2d Final\\src\\Saves\\" + worldFolder + "\\chunks.txt");
+    }
     public static int updownDistancemodifier = 100;
     public static int tempMoved = 0;
     public static String getXy(int x, String chunkID) {
-        File chunkFile = new File("Java Minecraft2d Final\\src\\Saves\\" + worldFolder + "\\chunks.txt");
         String data = "";
         try {
-            Scanner read = new Scanner(chunkFile);
+            Scanner read = new Scanner(getChunkFile());
             while (read.hasNextLine()) {
                 
                 tempMoved = (-Window.xmoved) - (Steve.getSteveChunkNum(Steve.getStevex()) * 800);
@@ -82,6 +84,7 @@ public class worldFile {
                 }
                 
                 String [] parts = data.split("%");
+                if(!parts[0].equals(String.valueOf(Steve.getSteveChunkNum((-Window.xmoved/50)+2)))){continue;}
                 if(parts[0].equals(String.valueOf(Steve.getSteveChunkNum((-Window.xmoved/50)+2))) && parts[1].equals(String.valueOf(worldFile.tempMoved)) ){
                     
                     prevx = Integer.toString(tempMoved);
@@ -100,16 +103,18 @@ public class worldFile {
         
         x = (x/50)*50;
         y = (y/50) *50;
+        
         String data = "";
-        File file = new File("Java Minecraft2d Final\\src\\Saves\\" + worldFolder + "\\chunks.txt");
         if(tempprevx == x && tempprevy == y){
             return Steve.blockType_Standing;
         }
         try {
-            Scanner reader = new Scanner(file);
+            Scanner reader = new Scanner(getChunkFile());
             while(reader.hasNextLine()){
+                
                 data = reader.nextLine();
                 String [] parts = data.split("%");
+                if(!parts[0].equals(String.valueOf(chunkNum))){continue;}
                 if(parts[0].equals(String.valueOf(chunkNum)) && parts[1].equals(String.valueOf(tempMoved)) && parts[2].equals(String.valueOf(y))){
                     
                     tempprevx =x;
