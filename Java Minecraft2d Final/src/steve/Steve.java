@@ -11,8 +11,9 @@ import res.textures.Textures;
 
 
 public class Steve {
-    public static int steveChunknum = 0, deltay = 0;
-    public static String blockType_Standing = getBlockType();
+    public static int steveChunknum = 0;
+    public static double deltay = 0;
+    public static String blockType_Standing = getBlockType(), block_Looking = worldFile.getBlockTypeLookingAt(InputHandler.mousex, InputHandler.mousey);
     private static boolean isJumping = false;
     private static int jumpStartY = 0;
 
@@ -30,12 +31,12 @@ public class Steve {
     }
     public static void renderSteve(Graphics2D g){
 
-        int actualY = getStevey()-Textures.steve.getHeight();
+        int actualY = getStevey()-Textures.steve.getHeight() -Textures.leg_height;
 
         if (isJumping) {
             actualY -= InputHandler.jumpheight - deltay;
             if (deltay < InputHandler.jumpheight) {
-                deltay += 1; // Controls jump speed, adjust as necessary
+                deltay += 0.55; // Controls jump speed, adjust as necessary
             } else {
                 isJumping = false;
                 deltay = 0;
@@ -43,10 +44,11 @@ public class Steve {
         } else {
             if (deltay > 0) {
                 actualY += deltay;
-                deltay -= 2; // Controls fall speed, adjust as necessary
+                deltay -= 0.5; // Controls fall speed, adjust as necessary
             }
         }
         g.drawImage(Textures.steve, getStevex()+75, actualY, null);
+        legAnimation.startAnimation(g, getStevex(), actualY+Textures.leg_height);
         int steveHeady = actualY-Textures.steveHead.getHeight();
         
         double theta = Math.atan2((InputHandler.mousey - steveHeady), (InputHandler.mousex - getStevex() + 100));

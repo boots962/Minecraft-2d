@@ -14,7 +14,7 @@ import steve.Steve;
 
 public class InputHandler implements KeyListener, MouseListener, FocusListener, MouseMotionListener{
     public static int walkSpeed = 3, mousex, mousey, mouseClickedx, mouseClickedy, blocksMined = 0, jumpheight = 140;
-    public static boolean F3 = false;
+    public static boolean F3 = false, iswalking = false;
     
     @Override
     public void mouseDragged(MouseEvent e) {
@@ -72,18 +72,21 @@ public class InputHandler implements KeyListener, MouseListener, FocusListener, 
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
         switch(key){
-            
+            case KeyEvent.VK_SPACE:
+                Steve.jump();
+                
+                break;
             case KeyEvent.VK_A:
                 Window.xmoved+= walkSpeed;
                 F3Men.direction = "South";
+                iswalking = true;
                 break;
             case KeyEvent.VK_D:
                 Window.xmoved-= walkSpeed;
                 F3Men.direction = "North";
+                iswalking = true;
                 break;
-            case KeyEvent.VK_SPACE:
-                Steve.jump();
-                break;
+           
             case KeyEvent.VK_F3:
                 F3 = !F3;
                 break;
@@ -92,6 +95,13 @@ public class InputHandler implements KeyListener, MouseListener, FocusListener, 
 
     @Override
     public void keyReleased(KeyEvent e) {
+        int keycode = e.getKeyCode();
+        switch(keycode){
+            case KeyEvent.VK_A:
+            case KeyEvent.VK_D:
+                iswalking = false;
+                break;
+        }
     }
     
 }

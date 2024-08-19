@@ -14,12 +14,12 @@ public class Textures {
 
 	public static BufferedImage iron, stone, background, dirt, grass, steve, steveRight, steveLeft, worldBorder;
 	public static BufferedImage iron_icon, stone_icon, dirt_icon, grass_icon;
-	public static BufferedImage Broken1, Broken2, Broken3, Broken4,Broken5, SteveLeftwalk, sprites, steveSpriteSheet, sun, sunset, moon, sunSprites, steveHead, pigss, pigL, pigR;
+	public static BufferedImage Broken1, Broken2, Broken3, Broken4,Broken5, SteveLeftwalk, sprites, steveSpriteSheet, sun, sunset, moon, sunSprites, steveHead, pigss, pigL, pigR, steveLegF;
 		
 	public static int Broken1_HEIGHT = 50, Broken1_WIDTH = 50, dirt_HEIGHT = 50, dirt_WIDTH = 50, grass_HEIGHT = 50, grass_WIDTH = 50, ironOre_HEIGHT = 50, ironORE_WIDTH = 50,
 	stone_HEIGHT = 50, stone_WIDTH = 50, border_WIDTH = 50, border_HEIGHT = 50, IRON_HEIGHT = 50, IRON_WIDTH = 50, STEVE_WIDTH = 26, STEVE_HEIGHT = 100, STEVEWALK_WIDTH = 51, STEVEWALK_HEIGHT = 100,
 	SUN_WIDTH = 51, SUN_HEIGHT = 51, SUNSET_WIDTH = 51, SUNSET_HEIGHT = 51, MOON_WIDTH = 51, MOON_HEIGHT = 51, head_height = 26, head_woidth = 26, icon_width = 35, icon_height = 35,
-	pig_height = 50, pig_width = 75;
+	pig_height = 50, pig_width = 75, leg_height = 38, leg_width = 25;
 
 	public Textures() {
 		try {
@@ -47,8 +47,9 @@ public class Textures {
 			//steve
 			steveRight = steveSpriteSheet.getSubimage(0, 0, STEVEWALK_WIDTH, STEVEWALK_HEIGHT);
 			steveLeft = steveSpriteSheet.getSubimage(51, 0, STEVEWALK_WIDTH, STEVEWALK_HEIGHT);
-			steve = steveSpriteSheet.getSubimage(102, 26, STEVE_WIDTH, STEVE_HEIGHT-26);
+			steve = steveSpriteSheet.getSubimage(102, 26, STEVE_WIDTH, STEVE_HEIGHT-26 - leg_height);
 			steveHead = steveSpriteSheet.getSubimage(102, 0, head_woidth, head_height);
+			steveLegF = steveSpriteSheet.getSubimage(102, STEVE_HEIGHT-leg_height, leg_width, leg_height);
 
 
 			//environment

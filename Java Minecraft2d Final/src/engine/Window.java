@@ -90,7 +90,7 @@ public class Window extends Canvas implements Runnable {
         
         int x = Steve.getStevex();
         int y = Steve.getStevey();
-        if(InputHandler.F3) F3Men.renderF3(g,framesA, x, y, Steve.getSteveChunkNum(Steve.getStevex()),Chunk.getChunkID(),"1.0Pre-Release (Vanilla)");
+        if(InputHandler.F3) F3Men.renderF3(g,framesA, x, y, Steve.getSteveChunkNum(Steve.getStevex()),Chunk.getChunkID(),"2.1.2Pre-Release (Vanilla)");
 
         BlockLoader.Loader(g);
         Steve.renderSteve(g);

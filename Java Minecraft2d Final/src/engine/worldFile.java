@@ -119,6 +119,7 @@ public class worldFile {
                     
                     tempprevx =x;
                     tempprevy = y;
+                    Steve.blockType_Standing = parts[3];
                     return parts[3];
                 }
             }
@@ -129,5 +130,32 @@ public class worldFile {
         return "";
     }
 
+    private static int prevxx = 0, prevyy = 0;
+    public static String getBlockTypeLookingAt(int x, int y){
+        x*=50;
+        
+
+        String data = "";
+       
+        try {
+            Scanner reader = new Scanner(getChunkFile());
+            while(reader.hasNextLine()){
+                
+                data = reader.nextLine();
+                String [] parts = data.split("%");
+                System.out.println(parts.length);
+                if(parts[1].equals(String.valueOf(x)) && parts[2].equals(String.valueOf(y))){
+                    prevxx = x;
+                    prevyy = y;
+                    Steve.block_Looking = parts[3];
+                    return parts[3];
+                }
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+        }
+
+        return "MINECRAFT:AIR";
+    }
 
 }
