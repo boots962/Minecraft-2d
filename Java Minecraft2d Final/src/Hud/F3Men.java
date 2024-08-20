@@ -12,7 +12,7 @@ import steve.Steve;
 public class F3Men {
     public static String direction = "Standing still";
     public static void renderF3(Graphics2D g, double fps, int x, int y, int chunkNum, String chunkID, String version){
-        int mousex = ((InputHandler.mousex/50)-Window.xmoved/50), mousey = Math.abs(-(InputHandler.mousey/-50)-64);
+        int mousex = ((InputHandler.mousex/50)-Window.xmoved/50);
         g.setColor(new Color(99, 107, 120));
         g.drawRect(0, 0, 150, 100);
         g.setColor(Color.white);
@@ -27,7 +27,7 @@ public class F3Men {
         g.drawString("Time: " + Math.round(dayNightChanger.time), 1150, 55);
         g.drawString("BLOCK_LOOKING_AT: "+ Steve.block_Looking, 1050, 70);
         g.drawString("Music?"+ Music.isPlaying(), 1150, 85);
-        g.drawString("Song:--"+ Music.isPlaying(), 1050, 100);
+        g.drawString("Song:--"+ Music.songPlaying(), 850, 100);
     } 
 
 } 

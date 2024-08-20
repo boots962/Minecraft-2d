@@ -14,6 +14,7 @@ import Terrain.BlockLoader;
 import Terrain.Chunk;
 import res.textures.Textures;
 import steve.Steve;
+import steve.soundFX;
 
 public class Window extends Canvas implements Runnable {
     public static int height = 720, width = 1280, renderedTimes = 0, xmoved = 0;
@@ -41,6 +42,7 @@ public class Window extends Canvas implements Runnable {
     public void run(){ //renders/deals with the fps when the game starts running
         requestFocus();
         Music.getSong();
+        soundFX.startFx();
         double unproc = 0, secondsPer = 1/60.0;
 		long prev = System.nanoTime();
 		boolean ticked = false;
@@ -79,7 +81,7 @@ public class Window extends Canvas implements Runnable {
     private void render(){ //Main render method
         bs = this.getBufferStrategy();
         Random rd= new Random();
-        int rand = rd.nextInt(1000);
+        int rand = rd.nextInt(10000);
         if(!Music.isPlaying() && rand == ran){
             Music.getSong();
             Music.play();

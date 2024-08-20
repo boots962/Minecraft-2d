@@ -10,6 +10,7 @@ import java.awt.event.MouseMotionListener;
 
 import Hud.F3Men;
 import steve.Steve;
+import steve.soundFX;
 
 
 public class InputHandler implements KeyListener, MouseListener, FocusListener, MouseMotionListener{
@@ -77,11 +78,17 @@ public class InputHandler implements KeyListener, MouseListener, FocusListener, 
                 iswalking = true;
                 break;
             case KeyEvent.VK_A:
+                if(!soundFX.clipRunning()){
+                    soundFX.playClip();
+                }
                 Window.xmoved+= walkSpeed;
                 F3Men.direction = "South";
                 iswalking = true;
                 break;
             case KeyEvent.VK_D:
+                 if(!soundFX.clipRunning()){
+                soundFX.playClip();
+                 }
                 Window.xmoved-= walkSpeed;
                 F3Men.direction = "North";
                 iswalking = true;
@@ -101,6 +108,7 @@ public class InputHandler implements KeyListener, MouseListener, FocusListener, 
             case KeyEvent.VK_D:
             case KeyEvent.VK_SPACE:
                 iswalking = false;
+                soundFX.stopClip();
                 break;
         }
     }
