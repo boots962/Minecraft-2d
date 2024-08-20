@@ -13,7 +13,7 @@ import steve.Steve;
 
 
 public class InputHandler implements KeyListener, MouseListener, FocusListener, MouseMotionListener{
-    public static int walkSpeed = 3, mousex, mousey, mouseClickedx, mouseClickedy, blocksMined = 0, jumpheight = 140;
+    public static int walkSpeed = 3, mousex, mousey, mouseClickedx, mouseClickedy, blocksMined = 0, jumpheight = 70;
     public static boolean F3 = false, iswalking = false;
     
     @Override
@@ -74,7 +74,7 @@ public class InputHandler implements KeyListener, MouseListener, FocusListener, 
         switch(key){
             case KeyEvent.VK_SPACE:
                 Steve.jump();
-                
+                iswalking = true;
                 break;
             case KeyEvent.VK_A:
                 Window.xmoved+= walkSpeed;
@@ -99,6 +99,7 @@ public class InputHandler implements KeyListener, MouseListener, FocusListener, 
         switch(keycode){
             case KeyEvent.VK_A:
             case KeyEvent.VK_D:
+            case KeyEvent.VK_SPACE:
                 iswalking = false;
                 break;
         }

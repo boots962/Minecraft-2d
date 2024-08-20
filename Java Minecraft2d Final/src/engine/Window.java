@@ -4,6 +4,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
+import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -39,6 +40,7 @@ public class Window extends Canvas implements Runnable {
 
     public void run(){ //renders/deals with the fps when the game starts running
         requestFocus();
+        Music.getSong();
         double unproc = 0, secondsPer = 1/60.0;
 		long prev = System.nanoTime();
 		boolean ticked = false;
@@ -72,10 +74,16 @@ public class Window extends Canvas implements Runnable {
         game = new Thread(this, "Minecraft");
         game.start();
     }
-
+   
+    int ran = 5;
     private void render(){ //Main render method
         bs = this.getBufferStrategy();
-
+        Random rd= new Random();
+        int rand = rd.nextInt(1000);
+        if(!Music.isPlaying() && rand == ran){
+            Music.getSong();
+            Music.play();
+        }
 		if(bs == null) {
 			createBufferStrategy(2);
 			return;

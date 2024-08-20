@@ -4,9 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 import engine.InputHandler;
+import engine.Music;
 import engine.Window;
 import engine.dayNightChanger;
-import engine.worldFile;
 import steve.Steve;
 
 public class F3Men {
@@ -26,5 +26,8 @@ public class F3Men {
         g.drawString("Walking? " + InputHandler.iswalking, 1150, 40);
         g.drawString("Time: " + Math.round(dayNightChanger.time), 1150, 55);
         g.drawString("BLOCK_LOOKING_AT: "+ Steve.block_Looking, 1050, 70);
+        g.drawString("Music?"+ Music.isPlaying(), 1150, 85);
+        g.drawString("Song:--"+ Music.isPlaying(), 1050, 100);
     } 
+
 } 
