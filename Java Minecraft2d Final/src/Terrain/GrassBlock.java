@@ -43,7 +43,7 @@ public class GrassBlock {
                     int temp = x1/800;
                     x1 -= (temp*800);
                 }
-                Chunk.chunkBlocks(x1, y1, "MINECRAFT:GRASS_BLOCK"); //to save the blocks location and type of block
+                Chunk.chunkBlocks(x1, y1, "MINECRAFT:GRASS_BLOCK", ""); //to save the blocks location and type of block
             }
 
         }

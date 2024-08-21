@@ -42,18 +42,19 @@ public class BlockLoader {
        
     }
 
-    public static void addBlocks(int depth, String blockType, int ymod){
+    public static void addBlocks(int depth, String blockType, int ymod, String id){
         for (int u = Steve.getSteveChunkNum(Steve.getStevex())*16; u <= (Steve.getSteveChunkNum(Steve.getStevex())*16+16); u++){
                     int o = 0;
                     while(o < depth){
                     int mult1 = ((int) Math.abs((((Perlin.func(u)) * 50) + 49) / 50 * 50)) / 10;
+                    // int y = (mult * 50) + (50 * j) + 300;
                     int y1 = (mult1 * 50) + 50 + (50 * u) + (100)+ymod;
                     int x1 = (u * 50);
                     if(x1 > 800 || x1==800&&u==Steve.getSteveChunkNum(Steve.getStevex())*16){
                         int temp = x1/800;
                         x1 -= (temp*800);
                     }
-                    Chunk.chunkBlocks(x1, y1, blockType); //to save the blocks location and type of block
+                    Chunk.chunkBlocks(x1, y1, blockType, id); //to save the blocks location and type of block
                     o++;
                     }
                 }

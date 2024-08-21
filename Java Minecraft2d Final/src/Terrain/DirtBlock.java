@@ -34,7 +34,7 @@ public class DirtBlock {
         chunkID = "x-d"+ Steve.getSteveChunkNum(Steve.getStevex());
 
          if(!Chunk.chunkInfo(chunkID) && -Window.xmoved/50 !=1){ //checks if chunk has alr been accessed 
-            BlockLoader.addBlocks(3, "MINECRAFT:DIRT_BLOCK", 0);
+            BlockLoader.addBlocks(3, "MINECRAFT:DIRT_BLOCK", 0, "d");
     }
     }
 }

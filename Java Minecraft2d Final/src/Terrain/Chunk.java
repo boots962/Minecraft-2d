@@ -39,13 +39,12 @@ public class Chunk {
         return false;
     }
 
-    public static void chunkBlocks(int x, int y, String BLOCK_TYPE){
+    public static void chunkBlocks(int x, int y, String BLOCK_TYPE, String id){
        
         
         try {
             FileWriter writer = new FileWriter(chunkFile, true);
-            String id = "";
-            if(BLOCK_TYPE.equals("MINECRAFT:DIRT_BLOCK")) id="d";
+     
 
             writer.append(Steve.getSteveChunkNum(Steve.getStevex())+id+ "%" + x + "%" + y + "%" + BLOCK_TYPE); //assums the chunk has not been loaded so it will input the chunkID into the file
             writer.append("\n");
