@@ -8,6 +8,7 @@ import engine.Music;
 import engine.Window;
 import engine.dayNightChanger;
 import steve.Steve;
+import steve.soundFX;
 
 public class F3Men {
     public static String direction = "Standing still";
@@ -28,6 +29,7 @@ public class F3Men {
         g.drawString("BLOCK_LOOKING_AT: "+ Steve.block_Looking, 1050, 70);
         g.drawString("Music?"+ Music.isPlaying(), 1150, 85);
         g.drawString("Song:--"+ Music.songPlaying(), 850, 100);
+        g.drawString("Sfx:--"+ soundFX.clip.toString(), 850, 115);
     } 
 
 } 

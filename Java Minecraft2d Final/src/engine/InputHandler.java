@@ -78,7 +78,9 @@ public class InputHandler implements KeyListener, MouseListener, FocusListener, 
                 iswalking = true;
                 break;
             case KeyEvent.VK_A:
+            
                 if(!soundFX.clipRunning()){
+                    soundFX.startFx();;
                     soundFX.playClip();
                 }
                 Window.xmoved+= walkSpeed;
@@ -87,6 +89,7 @@ public class InputHandler implements KeyListener, MouseListener, FocusListener, 
                 break;
             case KeyEvent.VK_D:
                  if(!soundFX.clipRunning()){
+                    soundFX.startFx();;
                 soundFX.playClip();
                  }
                 Window.xmoved-= walkSpeed;

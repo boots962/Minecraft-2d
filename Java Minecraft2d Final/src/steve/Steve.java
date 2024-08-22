@@ -36,7 +36,7 @@ public class Steve {
         if (isJumping) {
             actualY -= InputHandler.jumpheight - deltay;
             if (deltay < InputHandler.jumpheight) {
-                deltay += 0.55; // Controls jump speed, adjust as necessary
+                deltay += 3.5; // Controls jump speed, adjust as necessary
             } else {
                 isJumping = false;
                 deltay = 0;
@@ -44,7 +44,7 @@ public class Steve {
         } else {
             if (deltay > 0) {
                 actualY += deltay;
-                deltay -= 0.5; // Controls fall speed, adjust as necessary
+                deltay -= 1; // Controls fall speed, adjust as necessary
             }
         }
         g.drawImage(Textures.steve, getStevex()+75, actualY, null);

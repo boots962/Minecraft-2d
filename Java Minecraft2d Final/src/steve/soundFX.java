@@ -40,6 +40,7 @@ public class soundFX {
     }
 
     public static void playClip(){
+		
         clip.start();
     }
 
@@ -47,6 +48,7 @@ public class soundFX {
         clip.stop();
     }
     public static boolean clipRunning(){
+		
         return clip.isRunning();
     }
 }
