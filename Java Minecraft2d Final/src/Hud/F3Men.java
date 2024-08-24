@@ -7,6 +7,7 @@ import engine.InputHandler;
 import engine.Music;
 import engine.Window;
 import engine.dayNightChanger;
+import engine.worldFile;
 import steve.Steve;
 import steve.soundFX;
 
@@ -22,6 +23,8 @@ public class F3Men {
         g.drawString("FPS/"+fps, 5, 40 );
         g.drawString("/N:" + chunkNum, 5, 55);
         g.drawString("BLOCK_TYPE_STANDING:"+Steve.getBlockType(), 5, 70);
+        g.drawString("Moved_in_chunk - " + worldFile.tempMoved, 5, 85);
+        //right side
         g.drawString(direction, 1200, 10);
         g.drawString("Mouse Block x:" + mousex + "; Mouse Block y:" + Math.abs(-(InputHandler.mousey/-50)-64), 1050, 25);
         g.drawString("Walking? " + InputHandler.iswalking, 1150, 40);

@@ -3,6 +3,7 @@ package Terrain;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+import engine.InputHandler;
 import engine.Window;
 import steve.Steve;
 
@@ -34,8 +35,10 @@ public class BlockLoader {
             GrassBlock.placeBlock(g, currentChunkX);
             DirtBlock.placeBlock(g, currentChunkX);
             StoneBlock.placeBlock(g, currentChunkX);
+            if(InputHandler.chunkBorders){
             g.setColor(Color.red);
             g.drawRect((currentChunkX)+ Window.xmoved, 0, 50*16, 720);
+            }
         }
 
         // render chunk outlines for debugging

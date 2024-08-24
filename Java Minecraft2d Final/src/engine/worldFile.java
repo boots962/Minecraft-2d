@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
+import Hud.F3Men;
 import steve.Steve;
 
 public class worldFile {
@@ -84,11 +85,24 @@ public class worldFile {
                 }
                 
                 String [] parts = data.split("%");
-                if(!parts[0].equals(String.valueOf(Steve.getSteveChunkNum((-Window.xmoved/50)+2)))){continue;}
-                if(parts[0].equals(String.valueOf(Steve.getSteveChunkNum((-Window.xmoved/50)+2))) && parts[1].equals(String.valueOf(worldFile.tempMoved)) ){
+                if(!parts[0].equals(String.valueOf(Steve.getSteveChunkNum(Steve.getStevex())))){continue;}
+                if(parts[0].equals(String.valueOf(Steve.getSteveChunkNum(Steve.getStevex()))) && parts[1].equals(String.valueOf(worldFile.tempMoved))){
                     
                     prevx = Integer.toString(tempMoved);
+                    if(prevy!="" && Integer.parseInt(prevy) - Integer.parseInt(parts[2])>= 100 ){
+                        System.out.println(Integer.parseInt(prevy) + " " + Integer.parseInt(parts[2]));
+                        if(F3Men.direction.equals("North")) InputHandler.rightFlag = false;
+                        if(F3Men.direction.equals("South")) InputHandler.leftFlag = false;
+                        parts[2] = prevx;
+                    }
+                    if(F3Men.direction.equals("South")&&InputHandler.rightFlag == false ){
+                        InputHandler.rightFlag = true;
+                    }
+                    if(F3Men.direction.equals("North")&&InputHandler.leftFlag == false ){
+                        InputHandler.leftFlag = true;
+                    }
                     prevy = parts[2];
+                    
                     return parts[2];
                 }
             }

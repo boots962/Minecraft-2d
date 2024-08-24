@@ -10,7 +10,7 @@ public class legAnimation {
     private static double legAngle = 0; // Current angle of the leg
     private static boolean increasingAngle = true; // To track the direction of rotation
     private static final double maxAngle = Math.toRadians(45); // 45 degrees in radians
-    private static final double rotationSpeed = 0.01; // Adjust this to control the speed of rotation
+    private static final double rotationSpeed = 0.05; // Adjust this to control the speed of rotation
 
     public static void startAnimation(Graphics2D g, int steveX, int steveY) {
         if (InputHandler.iswalking) {

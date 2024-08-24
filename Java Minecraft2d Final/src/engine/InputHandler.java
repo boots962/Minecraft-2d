@@ -14,8 +14,9 @@ import steve.soundFX;
 
 
 public class InputHandler implements KeyListener, MouseListener, FocusListener, MouseMotionListener{
-    public static int walkSpeed = 3, mousex, mousey, mouseClickedx, mouseClickedy, blocksMined = 0, jumpheight = 70;
-    public static boolean F3 = false, iswalking = false;
+    public static int walkSpeed = 4, mousex, mousey, mouseClickedx, mouseClickedy, blocksMined = 0, jumpheight = 75;
+    public static boolean F3 = false, iswalking = false, rightFlag = true, leftFlag = true, chunkBorders = false;;
+    public static boolean keys[] = new boolean[68836];
     
     @Override
     public void mouseDragged(MouseEvent e) {
@@ -72,48 +73,68 @@ public class InputHandler implements KeyListener, MouseListener, FocusListener, 
     @Override
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
-        switch(key){
-            case KeyEvent.VK_SPACE:
-                Steve.jump();
-                iswalking = true;
-                break;
-            case KeyEvent.VK_A:
-            
-                if(!soundFX.clipRunning()){
-                    soundFX.startFx();;
-                    soundFX.playClip();
-                }
-                Window.xmoved+= walkSpeed;
-                F3Men.direction = "South";
-                iswalking = true;
-                break;
-            case KeyEvent.VK_D:
-                 if(!soundFX.clipRunning()){
-                    soundFX.startFx();;
+          if(key > 0 && key < keys.length){
+            keys[key] = true;
+          }
+        
+        if(key==KeyEvent.VK_SPACE){
+            Steve.jump();
+            iswalking = true;
+        }
+        if(key==KeyEvent.VK_A){
+            if(!leftFlag){}
+            else{
+            if(!soundFX.clipRunning()){
+                soundFX.startFx();;
                 soundFX.playClip();
-                 }
-                Window.xmoved-= walkSpeed;
-                F3Men.direction = "North";
-                iswalking = true;
-                break;
-           
-            case KeyEvent.VK_F3:
-                F3 = !F3;
-                break;
+            }
+            Window.xmoved+= walkSpeed;
+            F3Men.direction = "South";
+            iswalking = true;
+        }
+        }
+        if(key==KeyEvent.VK_D){
+            if(!rightFlag){}
+            else{
+             if(!soundFX.clipRunning()){
+                soundFX.startFx();;
+            soundFX.playClip();
+             }
+            Window.xmoved-= walkSpeed;
+            F3Men.direction = "North";
+            iswalking = true;
+            }
+            }
+            if(keys[KeyEvent.VK_SPACE] && keys[KeyEvent.VK_D]){
+                Steve.jump();
+                if(!rightFlag){}
+            else{
+             if(!soundFX.clipRunning()){
+                soundFX.startFx();;
+            soundFX.playClip();
+             }
+            Window.xmoved-= walkSpeed;
+            F3Men.direction = "North";
+            iswalking = true;
+            }
+            }
+        if(keys[KeyEvent.VK_F3] && keys[KeyEvent.VK_H]){
+             chunkBorders = !chunkBorders;
+         }
+        if(key == KeyEvent.VK_F3){
+            F3 = !F3;
+            
         }
     }
 
+    
+        
     @Override
     public void keyReleased(KeyEvent e) {
-        int keycode = e.getKeyCode();
-        switch(keycode){
-            case KeyEvent.VK_A:
-            case KeyEvent.VK_D:
-            case KeyEvent.VK_SPACE:
-                iswalking = false;
-                soundFX.stopClip();
-                break;
+        for(int i = 0; i<keys.length; i++){
+            keys[i] = false;
         }
+
     }
     
 }
