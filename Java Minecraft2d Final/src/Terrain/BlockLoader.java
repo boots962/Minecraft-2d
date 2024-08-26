@@ -2,9 +2,11 @@ package Terrain;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.util.Random;
 
 import engine.InputHandler;
 import engine.Window;
+import engine.worldFile;
 import steve.Steve;
 
 public class BlockLoader {
@@ -61,5 +63,36 @@ public class BlockLoader {
                     o++;
                     }
                 }
+    }
+    private static Random veinNum = new Random();
+    private static int numVeins = veinNum.nextInt(10);
+    private static Random direction = new Random();
+    private static Random y2 = new Random();
+    public static Random size = new Random();
+
+    public static void makeRandom(Random x1, int ChunkId) {
+        int start = 0;
+
+        while(start<numVeins){
+        int Unx = x1.nextInt(chunkSize);
+        int Uny = y2.nextInt(720 + 300) -300;
+        int Direction = direction.nextInt(2);
+        int size = direction.nextInt(4);
+        
+        int x = (Unx/50)*50;
+        int y = (Uny/50)*50;
+
+        String dir = "";
+
+        if(Direction == 1){
+            dir = "LEFT";
+        }
+        else{
+            dir = "RIGHT";
+        }
+
+        worldFile.writeRandom(ChunkId, x, y, dir, size);
+        start++;
+    }
     }
 }

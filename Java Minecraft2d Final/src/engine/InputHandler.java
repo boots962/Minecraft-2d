@@ -14,7 +14,7 @@ import steve.soundFX;
 
 
 public class InputHandler implements KeyListener, MouseListener, FocusListener, MouseMotionListener{
-    public static int walkSpeed = 4, mousex, mousey, mouseClickedx, mouseClickedy, blocksMined = 0, jumpheight = 75;
+    public static int walkSpeed = 3, mousex, mousey, mouseClickedx, mouseClickedy, blocksMined = 0, jumpheight = 75;
     public static boolean F3 = false, iswalking = false, rightFlag = true, leftFlag = true, chunkBorders = false;;
     public static boolean keys[] = new boolean[68836];
     
@@ -96,6 +96,7 @@ public class InputHandler implements KeyListener, MouseListener, FocusListener, 
         if(key==KeyEvent.VK_D){
             if(!rightFlag){}
             else{
+                
              if(!soundFX.clipRunning()){
                 soundFX.startFx();;
             soundFX.playClip();
@@ -106,6 +107,7 @@ public class InputHandler implements KeyListener, MouseListener, FocusListener, 
             }
             }
             if(keys[KeyEvent.VK_SPACE] && keys[KeyEvent.VK_D]){
+                walkSpeed = 5;
                 Steve.jump();
                 if(!rightFlag){}
             else{
@@ -116,6 +118,20 @@ public class InputHandler implements KeyListener, MouseListener, FocusListener, 
             Window.xmoved-= walkSpeed;
             F3Men.direction = "North";
             iswalking = true;
+            }
+            }
+            if(keys[KeyEvent.VK_SPACE] && keys[KeyEvent.VK_A]){
+                walkSpeed = 5;
+                Steve.jump();
+                if(!leftFlag){}
+                else{
+                if(!soundFX.clipRunning()){
+                    soundFX.startFx();;
+                    soundFX.playClip();
+                }
+                Window.xmoved+= walkSpeed;
+                F3Men.direction = "South";
+                iswalking = true;
             }
             }
         if(keys[KeyEvent.VK_F3] && keys[KeyEvent.VK_H]){
@@ -134,7 +150,9 @@ public class InputHandler implements KeyListener, MouseListener, FocusListener, 
         for(int i = 0; i<keys.length; i++){
             keys[i] = false;
         }
-
+        walkSpeed = 3;
+        iswalking = false;
+        soundFX.stopClip();
     }
     
 }

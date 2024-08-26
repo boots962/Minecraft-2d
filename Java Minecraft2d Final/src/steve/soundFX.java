@@ -1,7 +1,6 @@
 package steve;
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;

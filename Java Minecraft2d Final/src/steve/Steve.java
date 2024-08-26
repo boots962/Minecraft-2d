@@ -15,10 +15,10 @@ public class Steve {
     public static double deltay = 0;
     public static String blockType_Standing = getBlockType(), block_Looking = worldFile.getBlockTypeLookingAt(InputHandler.mousex, InputHandler.mousey);
     private static boolean isJumping = false;
-    private static int jumpStartY = 0;
+    public static int jumpStartY = 0, xmod = 0;
 
     public static int getStevex(){
-        return (-Window.xmoved/50) +2;
+        return ((-Window.xmoved)/50) +2;
     }
     public static int getStevey(){
         return Integer.parseInt(worldFile.getXy(getStevex(), Chunk.getChunkID()));
@@ -36,7 +36,7 @@ public class Steve {
         if (isJumping) {
             actualY -= InputHandler.jumpheight - deltay;
             if (deltay < InputHandler.jumpheight) {
-                deltay += 3.5; // Controls jump speed, adjust as necessary
+                deltay += 0.5; // Controls jump speed, adjust as necessary
             } else {
                 isJumping = false;
                 deltay = 0;
@@ -44,7 +44,7 @@ public class Steve {
         } else {
             if (deltay > 0) {
                 actualY += deltay;
-                deltay -= 1; // Controls fall speed, adjust as necessary
+                deltay -= 0.5; // Controls fall speed, adjust as necessary
             }
         }
         g.drawImage(Textures.steve, getStevex()+75, actualY, null);

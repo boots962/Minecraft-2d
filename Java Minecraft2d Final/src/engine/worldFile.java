@@ -8,6 +8,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import Hud.F3Men;
+import Terrain.StoneBlock;
 import steve.Steve;
 
 public class worldFile {
@@ -56,7 +57,37 @@ public class worldFile {
         }
     }
 
+    public static void writeRandom(int chunknum, int x, int y, String dir, int size){
+        try {
+            FileWriter fw = new FileWriter(getVeinFile(), true);
+            fw.append("\n");
+            fw.append(chunknum + "%" + x + "%" + y + "%"+dir+"%"+size);
+            
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+    }
 
+    public static void isIron(){
+        
+        try {
+            Scanner reader = new Scanner(getVeinFile());
+            while(reader.hasNextLine()){
+                
+                String[]parts = reader.nextLine().split("%");
+                if(parts.length>1) StoneBlock.ironLoc.put(Integer.parseInt(parts[1])-Window.xmoved, Integer.parseInt(parts[2]));
+                
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+        }
+        
+    }
+    public static File getVeinFile(){
+        return new File("Java Minecraft2d Final\\src\\Saves\\" + worldFolder + "\\veins.txt");
+    }
     public static File getChunkFile(){
         return new File("Java Minecraft2d Final\\src\\Saves\\" + worldFolder + "\\chunks.txt");
     }
@@ -71,6 +102,7 @@ public class worldFile {
                 tempMoved = (-Window.xmoved) - (Steve.getSteveChunkNum(Steve.getStevex()) * 800);
                 tempMoved = ((tempMoved) / 50) * 50 + 100;
                 if(Integer.toString(tempMoved).equals(prevx)){
+                    read.close();
                     return prevy;
                 }
                 if (tempMoved % 800 == 0 && tempMoved != 1) {
@@ -89,11 +121,12 @@ public class worldFile {
                 if(parts[0].equals(String.valueOf(Steve.getSteveChunkNum(Steve.getStevex()))) && parts[1].equals(String.valueOf(worldFile.tempMoved))){
                     
                     prevx = Integer.toString(tempMoved);
-                    if(prevy!="" && Integer.parseInt(prevy) - Integer.parseInt(parts[2])>= 100 ){
+                    if(tempMoved>=100 && prevy!="" && Integer.parseInt(prevy) - Integer.parseInt(parts[2])>= 100 ){
                         System.out.println(Integer.parseInt(prevy) + " " + Integer.parseInt(parts[2]));
                         if(F3Men.direction.equals("North")) InputHandler.rightFlag = false;
                         if(F3Men.direction.equals("South")) InputHandler.leftFlag = false;
-                        parts[2] = prevx;
+                        parts[2] = prevy;
+                        
                     }
                     if(F3Men.direction.equals("South")&&InputHandler.rightFlag == false ){
                         InputHandler.rightFlag = true;
@@ -102,7 +135,7 @@ public class worldFile {
                         InputHandler.leftFlag = true;
                     }
                     prevy = parts[2];
-                    
+                    read.close();
                     return parts[2];
                 }
             }
@@ -134,6 +167,7 @@ public class worldFile {
                     tempprevx =x;
                     tempprevy = y;
                     Steve.blockType_Standing = parts[3];
+                    reader.close();
                     return parts[3];
                 }
             }
@@ -144,7 +178,7 @@ public class worldFile {
         return "";
     }
 
-    private static int prevxx = 0, prevyy = 0;
+    public static int prevxx = 0, prevyy = 0;
     public static String getBlockTypeLookingAt(int x, int y){
         x*=50;
         
@@ -162,6 +196,7 @@ public class worldFile {
                     prevxx = x;
                     prevyy = y;
                     Steve.block_Looking = parts[3];
+                    reader.close();
                     return parts[3];
                 }
             }

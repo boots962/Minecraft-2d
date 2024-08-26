@@ -20,6 +20,7 @@ public class Chunk {
             while(read.hasNextLine()){
                 data = read.nextLine();
                 if(data.equals(chunkID)){ //we are checking if the chunk has alr been loaded before writing the chunks info to file
+                    read.close();
                     return true;
                 }
                 
@@ -62,6 +63,7 @@ public class Chunk {
             while(read.hasNextLine()){
                 data = read.nextLine(); 
                 if(data.contains(""+Steve.getSteveChunkNum((-Window.xmoved/50)+2)*16)){ //we are checking if the chunk has alr been loaded before writing the chunks info to file
+                    read.close();
                     return data;
                 }
             }

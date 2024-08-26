@@ -35,6 +35,7 @@ public class Window extends Canvas implements Runnable {
         addFocusListener(ih);
         addMouseMotionListener(ih);
     }
+
     public static void main(String [] args){ //main method 
         titlePage.init();
     }
@@ -100,12 +101,14 @@ public class Window extends Canvas implements Runnable {
         
         int x = Steve.getStevex();
         int y = Steve.getStevey();
-        if(InputHandler.F3) F3Men.renderF3(g,framesA, x, y, Steve.getSteveChunkNum(Steve.getStevex()),Chunk.getChunkID(),"2.1.2Pre-Release (Vanilla)");
 
         BlockLoader.Loader(g);
         Steve.renderSteve(g);
+        
+        if(InputHandler.F3) F3Men.renderF3(g,framesA, x, y, Steve.getSteveChunkNum(Steve.getStevex()),Chunk.getChunkID(),"2.2 Pre-Release (Vanilla)");
         g.dispose();
         bs.show();
+        renderedTimes++;
     }
 
     public static void create(){//creates window
