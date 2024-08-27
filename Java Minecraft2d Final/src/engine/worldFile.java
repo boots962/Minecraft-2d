@@ -98,14 +98,14 @@ public class worldFile {
         try {
             Scanner read = new Scanner(getChunkFile());
             while (read.hasNextLine()) {
-                
-                tempMoved = (-Window.xmoved) - (Steve.getSteveChunkNum(Steve.getStevex()) * 800);
-                tempMoved = ((tempMoved) / 50) * 50 + 100;
+                System.out.println(Steve.getStevex());    
+                tempMoved = ((Steve.getStevex())*50) - (Steve.getSteveChunkNum(Steve.getStevex()) * 800);
+                tempMoved = ((tempMoved) / 50) * 50;
                 if(Integer.toString(tempMoved).equals(prevx)){
                     read.close();
                     return prevy;
                 }
-                if (tempMoved % 800 == 0 && tempMoved != 1) {
+                if (tempMoved % 850 == 0 && tempMoved != 1) {
                     tempMoved = 0;
                 }
                 if(tempMoved > 800){
